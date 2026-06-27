@@ -1,0 +1,232 @@
+/* ─── Top-right "Already have an account?" bar ──────────────── */
+.signup-form__topbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 18px 40px 0;
+  /* Lives OUTSIDE the form card, at the top of the right panel */
+}
+
+.signup-form__topbar p {
+  font-size: 13.5px;
+  color: #6b7280;
+}
+
+.signup-form__topbar a {
+  color: #111827;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.signup-form__topbar a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Form heading block ─────────────────────────────────────── */
+.auth-form__header {
+  margin-bottom: 26px;
+}
+
+.auth-form__header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.auth-form__header p {
+  font-size: 13.5px;
+  color: #6b7280;
+  margin: 0;
+  line-height: 1.55;
+}
+
+/* ─── Form layout — SINGLE column (matches reference image) ─── */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.signup-form__grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* single column — like the image */
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+/* ─── Field group ────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* ─── Inputs ─────────────────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 14.5px;
+  font-family: inherit;
+  transition: border-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #6b7280;
+  background: #ffffff;
+  box-shadow: none;    /* no glow ring — matches the clean image */
+}
+
+.form-input.error {
+  border-color: #ef4444;
+  background: #fff;
+}
+
+/* ─── Password wrapper (eye toggle) ─────────────────────────── */
+.form-group--password {
+  position: relative;
+}
+
+.form-group--password .form-input {
+  padding-right: 46px;
+}
+
+.form-group__eye-btn {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #9ca3af;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.form-group__eye-btn:hover {
+  color: #6b7280;
+}
+
+/* ─── Error message ──────────────────────────────────────────── */
+.form-error {
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 2px;
+}
+
+.form-error--inline {
+  display: block;
+  margin-top: -6px;
+  margin-bottom: 12px;
+}
+
+/* ─── Hint text ──────────────────────────────────────────────── */
+.signup-form__hint {
+  font-size: 12px;
+  color: #9ca3af;
+  font-style: italic;
+  line-height: 1.5;
+  margin: 8px 0 18px;
+}
+
+/* ─── Checkbox row ───────────────────────────────────────────── */
+.signup-form__checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.signup-form__checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #111827;
+  cursor: pointer;
+}
+
+.signup-form__checkbox span {
+  font-size: 13.5px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.signup-form__checkbox a {
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+}
+
+.signup-form__checkbox a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Submit button ──────────────────────────────────────────── */
+.btn-primary.btn-full.btn-lg {
+  width: 100%;
+  height: 50px;
+  background: #111827;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  /* remove old gradient, glow, shimmer */
+  background-image: none;
+  box-shadow: none;
+  position: static;
+  overflow: visible;
+}
+
+.btn-primary.btn-full.btn-lg::before {
+  display: none;
+}
+
+.btn-primary.btn-full.btn-lg:hover:not(:disabled) {
+  background: #1f2937;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary.btn-full.btn-lg:disabled {
+  background: #6b7280;
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .signup-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-form__topbar {
+    padding: 14px 24px 0;
+  }
+}

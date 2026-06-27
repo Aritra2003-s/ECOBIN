@@ -1,0 +1,160 @@
+/* ── Main Container ── */
+.pickup-management-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* ── Filter Tabs ── */
+.filter-tabs-container {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  overflow-x: auto; /* Allows scrolling on very small screens */
+  scrollbar-width: none; /* Hides scrollbar for Firefox */
+}
+
+.filter-tabs-container::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for Chrome/Safari */
+}
+
+.filter-tabs-container .btn {
+  white-space: nowrap;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+/* ── Status Info Bar (New) ── */
+.status-info-bar {
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  animation: slideDown 0.3s ease-out;
+}
+
+.status-info-bar p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.status-info-bar strong {
+  color: #1e293b;
+  text-transform: capitalize;
+}
+
+/* ── Typography Utilities ── */
+.capitalize-text {
+  text-transform: capitalize;
+}
+
+.text-muted {
+  color: var(--text-muted, #64748b);
+  font-size: 0.85rem;
+}
+
+/* ── Modal Content ── */
+.modal-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 4px 0;
+}
+
+.pickup-summary-card {
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.pickup-summary-card strong {
+  color: #0f172a;
+}
+
+/* ── Modal Actions ── */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* ── Responsive Adjustments ── */
+
+/* Tablets and below */
+@media (max-width: 768px) {
+  .page-header {
+    margin-bottom: 16px;
+  }
+  
+  .status-info-bar {
+    padding: 12px;
+  }
+  
+  .status-info-bar p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .pickup-management-container {
+    gap: 16px;
+  }
+
+  .filter-tabs-container {
+    background: transparent;
+    padding: 0;
+  }
+
+  .filter-tabs-container .btn {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse; /* Put Cancel at the bottom */
+  }
+  
+  .modal-actions .btn {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .pickup-summary-card {
+    font-size: 0.85rem;
+    padding: 12px;
+  }
+}

@@ -1,0 +1,123 @@
+.insight-card-scene {
+  height: 240px;
+  perspective: 1500px;
+}
+
+.insight-card__inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.insight-card__inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.insight-card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem;
+  border-radius: 20px;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Light Aesthetic BGs */
+.insight-card__face--front {
+  background: linear-gradient(135deg, #ffffff 0%, #d3f3b9 100%);
+  color: #1e293b;
+}
+
+.insight-card__face--back {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  color: #064e3b;
+  transform: rotateY(180deg);
+}
+
+/* Header & Tags */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.insight-card__tag {
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.insight-card__time {
+  font-size: 0.7rem;
+  color: #5d7392;
+}
+
+/* Typography */
+.insight-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin: 1rem 0;
+  flex-grow: 1;
+}
+
+.insight-card__body {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #334155;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+/* Meta Section */
+.insight-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.insight-card__meta-note {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #98bbec;
+}
+
+.insight-card__status-indicator {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #10b981;
+}
+
+/* Footer Hints */
+.hint-text, .tap-to-return {
+  font-size: 0.65rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  margin-top: auto;
+  
+}
+
+.analysis-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #059669;
+}
+
+/* Read State Styling */
+.insight-card-scene.is-read .insight-card__face--front {
+  opacity: 0.8;
+}

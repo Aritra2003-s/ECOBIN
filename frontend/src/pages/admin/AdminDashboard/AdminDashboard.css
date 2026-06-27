@@ -1,0 +1,363 @@
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  background: linear-gradient(to bottom, #fdfdfd 20%, #f7faf9 100%);
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.02;
+  color: var(--color-ink);
+}
+
+.page-subtitle {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  max-width: 58ch;
+  font-size: 1rem;
+}
+
+.admin-dashboard__pulse {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 18px;
+  padding: 24px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top left, rgba(34, 197, 94, 0.16), transparent 26%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.96) 0%, rgba(23, 83, 57, 0.94) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-xl);
+}
+
+.admin-dashboard__eyebrow {
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgb(70, 177, 116);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.admin-dashboard__pulse h2 {
+  margin-top: 14px;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.admin-dashboard__pulse p {
+  margin-top: 10px;
+  max-width: 52ch;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.admin-dashboard__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.admin-dashboard__filter-btn {
+  /* Reset & Base */
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+  color: rgba(255, 255, 255, 0.92);
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  
+  /* 3D Depth Transition */
+  transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  
+  /* The "Lifted" Shadow - creates height */
+  box-shadow: 0 4px 0 0 rgba(0, 0, 0, 0.2), 
+              0 8px 16px rgba(0, 0, 0, 0.1);
+  
+  /* Initial Position */
+  transform: translateY(-2px);
+}
+
+/* Hover: Glow and slight lift */
+.admin-dashboard__filter-btn:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 0 0 rgba(0, 0, 0, 0.2), 
+              0 12px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Active/Selected State: The "Pressed" look */
+.admin-dashboard__filter-btn.active {
+  background: rgba(255, 255, 255, 0.98);
+  color: #1a1a1a; /* Dark ink color */
+  border-color: #c9a66b;
+  
+  /* Move button down to meet the shadow */
+  transform: translateY(2px); 
+  
+  /* Shadow shrinks to look like it's touching the floor */
+  box-shadow: 0 0px 0 0 rgba(201, 166, 107, 0.5), 
+              0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Click Animation: Instant response */
+.admin-dashboard__filter-btn:active {
+  transform: translateY(1px);
+  transition: all 0.05s;
+}
+
+.admin-dashboard__period-note {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+}
+
+.admin-dashboard__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.admin-dashboard__metric {
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.admin-dashboard__metric:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: rgba(201, 166, 107, 0.18);
+}
+
+.admin-dashboard__metric strong {
+  display: block;
+  font-size: 1.7rem;
+}
+
+.admin-dashboard__metric span {
+  display: block;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.86rem;
+}
+
+/* Container: Forces 4 cards in one line */
+/* Container: 4 in a row */
+.grid-4 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.kpi-card {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem;
+  border-radius: 24px;
+  position: relative;
+  
+  /* Light Gradient Background */
+  /* Starts with a soft version of the accent color and blends into white */
+  background: linear-gradient(145deg, rgba(212, 248, 237, 0.993) 0%, rgba(233, 236, 245, 0.9) 100%);
+  
+  /* Soft Shadow for 3D depth */
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.04),
+    0 2px 6px rgba(0, 0, 0, 0.02);
+    
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+/* Hover: Lift and Glow */
+.kpi-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 0 15px var(--card-accent-soft);
+  border-color: var(--card-accent);
+}
+
+/* Typography for Visibility */
+.kpi-card__title {
+  color: #64748b; /* Deep slate gray */
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-card__value {
+  color: #1e293b; /* Near black for contrast */
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  display: block;
+}
+
+.kpi-card__subtitle {
+  color: #475569;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Icon Styling */
+.kpi-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transform: translateZ(20px);
+}
+
+
+
+/* Container for the two charts */
+/* Container Background */
+.sustainability-overview {
+  background: linear-gradient(135deg, #cbd5e1 0%, #dae4f1 100%);
+  padding: 32px;
+  border-radius: 24px;
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
+
+.overview-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.overview-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+/* Glass Wrapper */
+.glass-container {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  gap: 24px;
+}
+
+/* Inner Panels */
+.glass-panel {
+  background: #ffffff !important;
+  border-radius: 18px !important;
+  padding: 24px !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+  border: none !important;
+}
+
+.panel-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 20px;
+}
+
+/* Fix for the grid layout */
+.kpi-row {
+  margin-bottom: 28px;
+}
+
+.flash-card-grid {
+  perspective: 1500px;
+  gap: 24px;
+}
+
+
+
+.admin-dashboard__insights {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.flash-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Enforces 2x2 */
+  gap: 24px;
+  perspective: 1000px; /* Essential for the 3D effect */
+}
+@media (max-width: 1080px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .admin-dashboard__pulse {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-dashboard__metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .admin-dashboard__panel {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-dashboard__controls {
+    gap: 8px;
+  }
+
+  .admin-dashboard__metrics {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,55 @@
+/* ── Container ── */
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Elements ── */
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+  -webkit-user-select: none; /* Support Safari 3+, Safari on iOS 3+ */
+  user-select: none; /* Prevents text selection on emojis */
+}
+
+.empty-state-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-primary, #111827);
+  margin: 0 0 6px 0;
+}
+
+.empty-state-message {
+  font-size: 14px;
+  color: var(--text-muted, #9ca3af);
+  max-width: 320px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.empty-state-action {
+  margin-top: 20px;
+}
+
+/* ── Responsive Adjustments ── */
+@media (max-width: 480px) {
+  .empty-state-container {
+    padding: 40px 16px; /* Slightly less padding on mobile */
+  }
+
+  .empty-state-icon {
+    font-size: 40px; /* Scale down the icon slightly */
+    margin-bottom: 12px;
+  }
+
+  .empty-state-title {
+    font-size: 16px;
+  }
+}

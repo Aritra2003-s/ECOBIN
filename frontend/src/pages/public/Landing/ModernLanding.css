@@ -1,0 +1,875 @@
+.landing-page {
+  min-height: 100vh;
+  /* "to bottom" ensures the first color is at the top and the second is at the bottom */
+  background: linear-gradient(to bottom, #fdfdfd 20%, #c5f1e4 100%);
+  
+  /* Ensuring the background covers the full height even if content grows */
+  background-attachment: fixed;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+}
+
+/* Navigation Container */
+.landing-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  
+  /* Light Gradient Fill Combination */
+  /* Transitions from Ivory Silk to a slightly cooler, translucent tint */
+  background: linear-gradient(
+    135deg, 
+    rgba(249, 248, 243, 0.92) 0%, 
+    rgba(214, 247, 236, 0.88) 100%
+  );
+  
+  /* Glassmorphism effects */
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); /* Extremely subtle lift */
+}
+/* Brand Section */
+.landing-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+/* Updated Brand Mark (Icon Container) */
+.landing-brand__mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px; /* Slightly softer corners */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Removed gradient for a cleaner, high-end look */
+  background: var(--color-bg-secondary); 
+  border: 1px solid rgba(0, 168, 107, 0.2); /* Subtle Cyber Emerald glow */
+  transition: transform 0.2s ease;
+}
+
+.landing-brand__mark:hover {
+  transform: scale(1.05); /* Interactive micro-interaction */
+}
+
+.landing-brand__mark img {
+  width: 80%; /* Padding around the logo within the box */
+  height: 80%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.15));
+}
+
+/* Typography Implementation */
+.landing-brand__copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1; /* Tightens the brand block */
+}
+
+.landing-brand__copy strong {
+  font-size: 1.1rem;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em; /* Modern, tight kerning */
+  color: #0F172A; /* Midnight Onyx for high visibility */
+  text-transform: uppercase; /* Optional: adds a professional feel */
+}
+
+.landing-brand__copy span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.01em;
+  margin-top: 2px;
+}
+
+/* Highlight word within the tagline span */
+.landing-brand__copy span em {
+  font-style: normal;
+  color: #00A86B; /* Cyber Emerald for the pop-out word */
+  font-weight: 600;
+}
+
+/* Action Buttons Container */
+.landing-nav__actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Button Refinement */
+.landing-nav__actions .btn {
+  /* Mechanical Necessity: Standardized width and single-line text */
+  min-width: 180px;
+  white-space: nowrap;
+  
+  padding: 16px 32px;
+  border-radius: 14px;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  position: relative;
+  top: 0;
+}
+
+/* --- Synced Button Styles (Primary & Secondary are identical) --- */
+/* --- Unified Dark Green Login Buttons --- */
+.btn-login {
+  /* Mechanical Necessities from your original button layout */
+  min-width: 180px;
+  white-space: nowrap;
+  padding: 16px 32px;
+  border-radius: 14px;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  top: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Dark Green Theme Setup */
+  background: linear-gradient(145deg, #279662, #05723b); 
+  color: #FFFFFF;
+  box-shadow: 0 4px 0 #146c43, 
+              0 8px 15px rgba(8, 52, 30, 0.3);
+}
+
+/* Hover Action state */
+.btn-login:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(145deg, #125c3a, #093a22);
+  box-shadow: 0 5px 0 #052214, 
+              0 12px 20px rgba(8, 52, 30, 0.4);
+}
+
+/* Active Pressed state */
+.btn-login:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #052214, 
+              0 2px 5px rgba(8, 52, 30, 0.2);
+}
+
+
+/* --- Simple Flat Dark CTA Button Override --- */
+.landing-cta__actions .btn-dark-flat {
+  all: unset; /* Complete reset of base button 3D shadows and animation properties */
+  box-sizing: border-box;
+  background-color: #0d1527 !important; /* Deep Onyx background */
+  color: #ffffff !important; /* Crisp white text labels */
+  padding: 16px 32px;
+  border-radius: 14px;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 180px;
+  position: relative;
+  top: 0;
+  transition: none !important; /* Disables ambient motion setups */
+  box-shadow: none !important; /* Removes structural 3D layer overrides */
+}
+
+/* Explicit lock down to completely freeze layout on hover, active click, or focus states */
+.landing-cta__actions .btn-dark-flat:hover,
+.landing-cta__actions .btn-dark-flat:active,
+.landing-cta__actions .btn-dark-flat:focus {
+  background-color: #013d29 !important;
+  color: #ffffff !important;
+  transform: none !important;
+  box-shadow: none !important;
+  top: 0 !important;
+}
+
+.landing-hero {
+  width: min(1160px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: 66px 0 32px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  align-items: center;
+  background: linear-gradient(to bottom, #fdfdfd 20%, #c5f1e4 100%);
+  
+  /* Ensuring the background covers the full height even if content grows */
+  background-attachment: fixed;
+  border-radius: 24px; /* Optional: adds to the organic feel */
+}
+
+.landing-hero__copy,
+.landing-hero__panel {
+  min-width: 0;
+}
+
+.landing-hero__panel {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(to bottom, #fdfdfd 20%, #c5f1e4 100%);
+}
+
+.landing-preview {
+  width: 100%;
+  padding: 24px;
+}
+
+.landing-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(0, 168, 107, 0.08);
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.landing-title {
+  margin-top: 18px;
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+
+  /* Modern, high-authority font family */
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+
+  /* Dark Gradient Logic */
+  background: linear-gradient(
+    180deg, 
+    #4a8f58 0%,    /* Bright top highlight */
+    #92a05a 50%,   /* Muted silver middle */
+    #2d2d31 100%   /* Deep charcoal bottom */
+  );
+  
+  /* Clips the background to the text */
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  /* Makes the original text color transparent so the gradient shows through */
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+
+  /* Optional: Adds a slight drop shadow to make the "Crystal" text pop */
+  
+}
+
+.landing-title span {
+  color: var(--color-primary);
+}
+
+.landing-description {
+  max-width: 55ch;
+  margin-top: 18px;
+  line-height: 1.6;
+  
+  /* Modern geometric font stack */
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  
+  /* Refined font scaling and color */
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  
+  /* Using a semi-transparent white for a "Glass" look */
+  color: rgba(10, 10, 9, 0.7);
+  
+  /* Subtle text-wrap balancing for cleaner blocks */
+  text-wrap: balance;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 640px) {
+  .landing-nav__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .landing-nav__actions .btn {
+    width: 100%;
+  }
+}
+
+.landing-stats {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.landing-stat {
+  padding: 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.landing-stat strong {
+  display: block;
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--color-ink);
+}
+
+.landing-stat span {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+}
+
+/* CRYSTAL UI THEME 
+  Apply these styles to your component 
+*/
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-blur: 16px;
+  --accent-cyan: #bef5fd;
+  --text-main: #ffffff;
+  --text-dim: rgba(255, 255, 255, 0.6);
+}
+
+/* Container styling */
+.landing-preview {
+  position: relative;
+  padding: 2.5rem;
+  border-radius: 28px;
+  background: linear-gradient(to bottom, #f0f4f0 0%, #6bf3ca 100%);
+  
+  /* The Glass Effect */
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  
+  /* The Crystal Edge */
+  border: 1px solid var(--glass-border);
+  
+  /* Depth and Elevation */
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+    0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  
+  color: var(--text-main);
+  max-width: 500px;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+}
+
+/* Header & Eyebrow */
+.landing-preview__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.landing-preview__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+/* Metric Display */
+.landing-preview__trend {
+  text-align: right;
+}
+
+.landing-preview__trend strong {
+  display: block;
+  font-size: 1.5rem;
+  color: rgb(59, 90, 90);
+  /* Subtle glow */
+  text-shadow: 0 0 12px rgba(71, 84, 97, 0.3);
+}
+
+.landing-preview__trend span {
+  font-size: 0.75rem;
+  color: rgb(56, 52, 52);
+}
+
+/* Typography */
+.landing-preview h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+  /* Reflective gradient on text */
+  background: linear-gradient(135deg, #2c2424dc 0%, rgba(2, 2, 2, 0.486) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.landing-preview p {
+  color: rgba(44, 38, 38, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+/* Audience Chips */
+.landing-preview__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+.landing-preview__chips span {
+  background: linear-gradient(135deg, #206625 50%, rgba(33, 92, 33, 0.486) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+/* Feature List */
+.landing-preview__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.landing-preview__list-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+}
+
+.landing-preview__list-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.landing-preview__list-item strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+  color: #080808;
+}
+
+.landing-preview__list-item span {
+  font-size: 0.85rem;
+  color: rgb(33, 53, 40);
+}
+
+/* Icon box styling (The emoji/icon container) */
+.landing-preview__list-item > span:first-child {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.landing-features,
+.landing-steps,
+.landing-cta,
+.landing-footer {
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* --- Features Section Layout --- */
+.landing-features {
+  padding: 100px 5%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- Section Heading --- */
+.landing-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 60px;
+  gap: 40px;
+}
+
+.landing-section-heading h2 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  max-width: 600px;
+}
+
+.landing-section-heading p {
+  font-size: 1.1rem;
+  color: #64748b;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* --- Normal Ghost Button Styling --- */
+.landing-section-heading .btn-ghost {
+  /* Mechanical Necessity: Standard size & single line */
+  min-width: 180px;
+  white-space: nowrap;
+  
+  padding: 14px 28px;
+  border-radius: 12px;
+  background: lighten(#c0f7dd, 10%);
+  color: #0f172a;
+  border: 1.5px solid rgba(15, 23, 42, 0.15);
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landing-section-heading .btn-ghost:hover {
+  background: rgba(172, 193, 243, 0.04);
+  border-color: #0f172a;
+  transform: translateY(-1px);
+}
+
+.landing-section-heading .btn-ghost:active {
+  background: rgba(128, 227, 235, 0.08);
+  transform: translateY(0);
+}
+
+/* --- Responsive Polish --- */
+@media (max-width: 920px) {
+  .landing-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  
+  .landing-section-heading .btn-ghost {
+    width: 100%;
+  }
+}
+
+/* Container: Forces a strict 2-column layout */
+.landing-feature-grid {
+  display: grid;
+  /* This creates two columns of equal width */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 24px;
+  max-width: 900px; /* Optional: limits width so cards don't get too stretched */
+  margin: 0 auto;
+}
+
+/* Card: Unique "Lifted" Design */
+.landing-feature-card {
+  all: unset; /* Resets button defaults */
+  display: block;
+  box-sizing: border-box;
+  padding: 32px;
+  border-radius: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* Hover State */
+.landing-feature-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-primary);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Active State: Distinctive "Inside Glow" */
+.landing-feature-card--active {
+  border-color: var(--color-primary);
+  background: linear-gradient(to bottom right, #ffffff, rgba(0, 168, 107, 0.02));
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+}
+
+/* Icon Styling */
+.landing-feature-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: white; /* Icon becomes white for high contrast */
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.landing-feature-card:hover .landing-feature-card__icon {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/* Text Styling */
+.landing-feature-card h3 {
+  font-size: 1.15rem;
+  color: #1e293b;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.landing-feature-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Mobile Responsive: Stacks to 1 column on small screens */
+@media (max-width: 640px) {
+  .landing-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.landing-steps {
+  padding: 80px 0; /* Increased padding for better section separation */
+}
+
+.landing-step-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.landing-step {
+  position: relative;
+  padding: 40px 30px;
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #f1f5f9;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden; /* Clips the background hover effect */
+  z-index: 1;
+}
+
+/* The "Unique" Hover Background Effect */
+.landing-step::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(22, 163, 74, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.landing-step:hover {
+  transform: translateY(-10px);
+  border-color: rgba(22, 163, 74, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.landing-step:hover::before {
+  opacity: 1;
+}
+
+/* Step Number Animation */
+.landing-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #f0fdf4; /* Light green emerald */
+  color: #16a34a;
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy effect */
+}
+
+.landing-step:hover span {
+  background: #16a34a;
+  color: #ffffff;
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 8px 15px rgba(22, 163, 74, 0.2);
+}
+
+/* Typography refinements */
+.landing-step h3 {
+  color: #0f172a;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.landing-step p {
+  margin: 0;
+  color: #64748b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Small Detail: Animated Bottom Line */
+.landing-step::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 3px;
+  background: #16a34a;
+  transition: all 0.4s ease;
+  transform: translateX(-50%);
+}
+
+.landing-step:hover::after {
+  width: 40%; /* Line grows from middle on hover */
+}
+
+
+.landing-cta {
+  padding: 30px 0 60px;
+  display: flex;
+  justify-content: center; /* Centers the box horizontally */
+}
+
+.landing-cta__box {
+  padding: 34px;
+  border-radius: 30px;
+  /* New Gradient: Modern Vibrant Emerald to Forest Green */
+  background: 
+    radial-gradient(circle at top right, rgba(85, 221, 135, 0.2), transparent 40%),
+    linear-gradient(135deg, #29725d 0%, #064e3b 100%);
+  color: #fff;
+  text-align: center; /* Centers h2 and p text */
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the button container and p tag */
+}
+
+.landing-cta__box p {
+  margin: 10px auto 0; /* 'auto' for horizontal margins keeps it centered */
+  max-width: 44ch;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.6;
+}
+
+.landing-cta__actions {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center; /* Centers the button inside the flex container */
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.landing-footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary); /* or use rgba(0, 0, 0, 0.6) */
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05); /* Optional: subtle line to separate from CTA */
+  width: 100%;
+}
+
+@media (max-width: 1080px) {
+  .landing-hero,
+  .landing-feature-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .landing-step-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 800px) {
+  .landing-nav {
+    padding: 14px 16px;
+  }
+
+  .landing-hero {
+    width: min(1240px, calc(100% - 24px));
+    grid-template-columns: 1fr;
+    padding-top: 34px;
+  }
+
+  .landing-features,
+  .landing-steps,
+  .landing-cta,
+  .landing-footer {
+    width: min(1240px, calc(100% - 24px));
+  }
+
+  .landing-stats,
+  .landing-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .landing-nav,
+  .landing-nav__actions,
+  .landing-hero__actions,
+  .landing-cta__actions {
+    flex-wrap: wrap;
+  }
+
+  .landing-preview,
+  .landing-cta__box {
+    padding: 22px;
+  }
+}
+
+
+
+
+

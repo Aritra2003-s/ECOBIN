@@ -1,0 +1,445 @@
+/* ==========================================================================
+   AI Waste Scanner Layout Configuration
+   ========================================================================== */
+
+.scanner-container {
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, #f4f7f9 0%, #d6e2f1 100%) !important;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  color: #1a202c;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   Tactile 3D Cards & Containers
+   ========================================================================== */
+
+/* Enhanced 3D Glassmorphic Card Styling */
+.card, .scanner-form-card, .result-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(240, 244, 248, 0.75) 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 14px;
+  padding: 24px;
+  /* Extruded multilayer shadow layout for structural 3D pop */
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 10px 24px -5px rgba(15, 45, 74, 0.08),
+    inset 0 1px 0px rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   Beacon Header (AI Status Panel)
+   ========================================================================== */
+
+.scanner-beacon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  border: 1px solid rgba(255, 77, 0, 0.2);
+  box-shadow: 
+    0 4px 15px rgba(15, 45, 74, 0.04),
+    inset 0 1px 0px #ffffff;
+}
+
+.scanner-beacon--active {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7f5 100%);
+  border-color: rgba(255, 77, 0, 0.4);
+}
+
+.scanner-beacon__status {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ff4d00;
+}
+
+.scanner-beacon__copy h2 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f2d4a;
+}
+
+.scanner-beacon__copy p {
+  margin: 0;
+  font-size: 13.5px;
+  color: #4a5568;
+  line-height: 1.5;
+  max-width: 46rem;
+}
+
+/* 3D Floating Pulse Core Indicator */
+.scanner-beacon__pulse {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ff4d00;
+  flex-shrink: 0;
+  box-shadow: 
+    0 2px 4px rgba(255, 77, 0, 0.4),
+    0 0 0 0 rgba(255, 77, 0, 0.5);
+  animation: pulse-ring 2.2s infinite ease-in-out;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 2px 4px rgba(255, 77, 0, 0.4), 0 0 0 0 rgba(255, 77, 0, 0.6);
+  }
+  70% {
+    box-shadow: 0 2px 4px rgba(255, 77, 0, 0.2), 0 0 0 14px rgba(255, 77, 0, 0);
+  }
+  100% {
+    box-shadow: 0 2px 4px rgba(255, 77, 0, 0), 0 0 0 0 rgba(255, 77, 0, 0);
+  }
+}
+
+/* ==========================================================================
+   Mode Switcher Toggle Panel
+   ========================================================================== */
+
+.mode-toggle {
+  display: flex;
+  background-color: rgba(15, 45, 74, 0.06);
+  padding: 5px;
+  border-radius: 12px;
+  gap: 4px;
+  margin-bottom: 24px;
+  width: fit-content;
+  border: 1px solid rgba(15, 45, 74, 0.04);
+}
+
+.mode-btn {
+  padding: 10px 22px;
+  border-radius: 9px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4a5568;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: capitalize;
+  font-family: inherit;
+}
+
+/* 3D Pressed-Out Toggle Button State */
+.mode-btn.active {
+  background: #ffffff;
+  color: #ff4d00;
+  box-shadow: 
+    0 4px 10px rgba(15, 45, 74, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.02);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Form Fields & Controls
+   ========================================================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a202c;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.scanner-textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid #a0aec0;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a202c;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.45);
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.scanner-textarea:focus {
+  outline: none;
+  border-color: #ff4d00;
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.08);
+}
+
+/* ==========================================================================
+   Optimized Dropzone & Upload Section
+   ========================================================================== */
+
+/* Scoped Dropzone Core Container */
+.scanner-container .upload-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 32px 24px;
+  border: 2px dashed #cbd5e0 !important;
+  border-radius: 12px;
+  background-color: #f8fafc !important;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  gap: 10px; /* Precise visual gap framework */
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+/* Scaled Custom SVG Icon Wrapper Placement */
+.dropzone-icon-wrapper svg {
+  width: 40px;
+  height: 40px;
+  color: #ff4d00;
+  display: block;
+  margin: 0 auto;
+}
+
+.dropzone-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a202c !important;
+  margin: 0;
+}
+
+.dropzone-subtext {
+  font-size: 12px;
+  color: #718096 !important;
+  margin: 0;
+}
+
+/* Multiselection Badges Layout System */
+.image-badge {
+  background-color: #03492c;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure long text filenames truncate gracefully without breaking layouts */
+.badge-filename {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px; 
+}
+
+/* Removable Close Action Button Stylings */
+.remove-badge-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.15s ease;
+}
+
+.remove-badge-btn:hover {
+  background: #b91c1c; /* Changes to clear high-visibility warning red on focus */
+  color: #ffffff;
+}
+/* ==========================================================================
+   Action Launch Button Structure
+   ========================================================================== */
+
+.scan-submit-btn {
+  margin-top: 18px;
+  width: 100%;
+  background-color: #044d28 !important;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* Deep interactive layered button shadow */
+  box-shadow: 
+    0 4px 12px rgba(15, 45, 74, 0.16),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* ==========================================================================
+   AI Insights Presentation Layer
+   ========================================================================== */
+
+.result-card {
+  border-left: 4px solid #ff4d00 !important;
+}
+
+.result-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f2d4a;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Matrix Distribution Block */
+.disposal-guidance-box {
+  background: rgba(255, 77, 0, 0.04);
+  border: 1px solid rgba(255, 77, 0, 0.12);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.guidance-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ff4d00;
+  text-transform: uppercase;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.02em;
+}
+
+.guidance-text {
+  font-size: 14.5px;
+  color: #1a202c;
+  line-height: 1.65;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Tag Matrix Layout */
+.tag-container {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.result-tag {
+  background-color: rgba(255, 77, 0, 0.06);
+  color: #ff4d00;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 77, 0, 0.05);
+}
+
+/* ==========================================================================
+   Chip Display Blocks
+   ========================================================================== */
+
+.chip-container {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  padding: 12px 14px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chip-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chip-value {
+  font-weight: 700;
+  font-size: 14px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  text-transform: capitalize;
+  width: fit-content;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* ==========================================================================
+   Responsive Architecture & Fallback Grids
+   ========================================================================== */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 768px) {
+  .scanner-container {
+    padding: 24px 12px;
+    border-radius: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mode-toggle {
+    width: 100%;
+  }
+
+  .mode-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr; /* Responsively collapses rows into single stack metrics */
+    gap: 10px;
+  }
+
+  .scanner-beacon {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .scanner-beacon__pulse {
+    align-self: flex-end;
+  }
+}

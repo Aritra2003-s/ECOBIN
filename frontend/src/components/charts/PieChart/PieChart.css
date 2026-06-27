@@ -1,0 +1,40 @@
+/* Container styling */
+.chart-container {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Header Label */
+.chart-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #64748b; /* text-slate-500 */
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+/* Modern Legend Overrides */
+.recharts-legend-item-text {
+  color: #334155 ; /* text-slate-700 */
+  font-size: 0.813rem ;
+  font-weight: 500;
+}
+
+/* Smooth hover transition for the slices */
+.pie-slice {
+  outline: none;
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.pie-slice:hover {
+  opacity: 0.85;
+}
+
+/* Forcing the Legend to stack top to bottom */
+.recharts-legend-wrapper {
+  line-height: 2.2 ;
+}

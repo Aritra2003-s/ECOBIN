@@ -1,0 +1,212 @@
+.pickup-request-container {
+  max-width: 900px; /* Increased from 540px for a more spacious layout */
+  margin: 0 auto;
+  padding: 32px 16px;
+  /* Replaced flat background color with a beautiful, clean light gradient fill */
+  background: linear-gradient(135deg, #d3e3ee 0%, #aff0cf 100%);
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  color: #1a202c; /* Deepened dark text color */
+  border-radius: 12px; /* Optional: Adds a gentle curve to the container edges */
+}
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 800; /* Bolder title contrast */
+  color: #0f2d4a;
+  margin: 0;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #4a5568; /* High-contrast subtle text */
+  margin: 4px 0 0 0;
+}
+
+.pickup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Semi-transparent transparent card layout */
+.card {
+  background: rgba(255, 255, 255, 0.65); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #cbd5e0;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.section-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.text-green {
+  color: #22543d; /* Enhanced dark green contrast for icons */
+}
+
+.pickup-request-container .section-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #1a202c !important; /* Forces it to override the white color */
+  margin: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.mt-12 {
+  margin-top: 16px;
+}
+
+/* Side-by-side flex block layout for state and zip code layout */
+.address-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 700; /* Heavy weight readability */
+  color: #1a202c;
+}
+
+.form-label.label-gray,
+.form-label.label-optional {
+  color: #4a5568; 
+  font-weight: 600;
+}
+
+/* Transparent Inputs with solid clear dark font graphics colors */
+.form-input, .quantity-input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #a0aec0;
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a202c; /* High clarity text graphics */
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.form-input:focus, .quantity-input:focus {
+  outline: none;
+  border-color: #1a202c;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.textarea-input {
+  height: auto;
+  padding: 10px 12px;
+  resize: none;
+}
+
+/* Quantity Configuration System */
+.quantity-group {
+  display: flex;
+  border: 1px solid #a0aec0;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 48px; /* Fixed height match with other fields */
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.quantity-group .quantity-input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+  background: transparent;
+}
+
+/* Expanded select box to prevent clipping 'kilograms', 'liters' */
+.quantity-select-wrapper {
+  border-left: 1px solid #a0aec0;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 115px; 
+  min-width: 115px;
+}
+
+.quantity-select {
+  border: none;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  padding-left: 12px;
+  padding-right: 28px; /* Room for custom indicator chevron arrow */
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a202c;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.select-wrapper, .quantity-select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after, .quantity-select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #1a202c; /* Bold crisp layout caret symbol */
+  pointer-events: none;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 32px;
+}
+
+.date-input {
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.btn-submit-full {
+  width: 100%;
+  background-color: #064e3b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.btn-submit-full:hover {
+  background-color: #022c22;
+}

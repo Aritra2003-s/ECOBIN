@@ -1,0 +1,64 @@
+/* ── Main Container ── */
+.history-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+}
+
+/* ── Typography Utilities ── */
+.capitalize-text {
+  text-transform: capitalize;
+}
+
+/* ── Tabs Layout ── */
+.history-tabs-container {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #333333;
+  
+  /* Enables smooth horizontal scrolling if many tabs are added later */
+  overflow-x: auto; 
+  -webkit-overflow-scrolling: touch;
+}
+
+.history-tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  font-weight: 400;
+  color: #808080;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 14px;
+  text-transform: capitalize;
+  /* Negative margin pulls the border down to perfectly overlap the container's bottom border */
+  margin-bottom: -2px; 
+  transition: all 0.15s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.history-tab-btn:hover {
+  color: #CCCCCC;
+}
+
+.history-tab-btn.active {
+  font-weight: 600;
+  color: #02570d;
+  border-bottom: 2px solid #FF4D00;
+}
+
+/* ── Responsive Adjustments ── */
+@media (max-width: 480px) {
+  .history-tabs-container {
+    justify-content: space-between; /* Spreads tabs evenly on mobile */
+  }
+  
+  .history-tab-btn {
+    flex: 1; /* Makes the buttons stretch to fill the space */
+    text-align: center;
+    padding: 10px 12px; /* Slightly reduced padding to prevent overflow */
+  }
+}

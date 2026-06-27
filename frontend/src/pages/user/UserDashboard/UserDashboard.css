@@ -1,0 +1,650 @@
+:root {
+  /* The color you provided, used as a dynamic accent */
+  --user-accent: rgb(236, 115, 136);
+  --user-accent-low: rgba(236, 115, 136, 0.15);
+  
+  /* Dark Theme Palette */
+  --dark-bg: #0d0f14;
+  --card-gradient: linear-gradient(145deg, #1a1d24 0%, #111319 100%);
+  --text-main: #ffffff;
+  --text-dim: #94a3b8;
+  --border-glass: rgba(255, 255, 255, 0.06);
+}
+
+
+.dashboard-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  background: linear-gradient(to bottom, #fdfdfd 20%, #c5f1e4 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.02;
+  color: #fdfbfb;
+}
+
+.page-subtitle {
+  margin: 10px 0 0;
+  color: #eee7e7;
+  max-width: 55ch;
+  font-size: 1rem;
+}
+
+/* Main Metric Hero Section - Modern Dark Card */
+.dashboard-highlight.glass-morph {
+  position: relative;
+  background: linear-gradient(to bottom, #ddf0d4 20%, #035a40 100%);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2.5rem;
+  transition: var(--transition-smooth);
+  animation: slideUpFade 0.8s ease-out;
+}
+
+/* Ambient Background Glow */
+.dashboard-highlight.glass-morph::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, var(--accent-gold-glow) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+
+
+/* Text Content Styling */
+.highlight-text {
+  position: relative;
+  z-index: 1;
+  max-width: 50%;
+}
+
+.dashboard-highlight__eyebrow {
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.dashboard-highlight h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #000000, #999861);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dashboard-highlight p {
+  color: linear-gradient(to right, #000000, #999861);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.dashboard-highlight p strong {
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+/* Container: Vertical stack positioned to the right */
+.dashboard-highlight__metrics {
+  display: flex;
+  flex-direction: column; /* Stack top to bottom */
+  gap: 1rem;
+  z-index: 1;
+  perspective: 1000px; /* For a 3D feel on hover */
+}
+
+/* Individual Flash Card Styling */
+.dashboard-highlight__metric {
+  text-align: left; /* Align text for a card feel */
+  display: flex;
+  flex-direction: row; /* Icon/Circle next to text */
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  min-width: 240px;
+  
+  /* Modern Dark Gradient Background */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: default;
+}
+
+/* Hover Effect: Flash Highlight */
+.dashboard-highlight__metric:hover {
+  transform: translateX(-10px) scale(1.02); /* Slight slide out effect */
+  background: linear-gradient(135deg, rgba(236, 115, 136, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-color: rgba(241, 13, 51, 0.4);
+  box-shadow: 0 12px 40px rgba(236, 115, 136, 0.15);
+}
+
+/* Shrink the circle for the flash card layout */
+.metric-circle {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  border-radius: 12px; /* Squared-off modern look */
+  background: rgba(236, 115, 136, 0.1);
+  border: 2px solid rgb(236, 115, 136);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  font-weight: 800;
+  font-size: 1rem;
+  color: rgb(236, 115, 136);
+  margin-bottom: 0; /* Remove old margin */
+  transition: transform 0.3s ease;
+}
+
+.dashboard-highlight__metric:hover .metric-circle {
+  transform: rotate(-10deg) scale(1.1);
+  background: rgb(236, 115, 136);
+  color: white;
+}
+
+/* Text visibility inside the dark card */
+.dashboard-highlight__metric div:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-highlight__metric strong {
+  font-size: 1.4rem;
+  color: #2b2727; /* Brightened for dark theme visibility */
+  display: block;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.dashboard-highlight__metric span {
+  font-size: 0.75rem;
+  color: #030c18; /* Slate gray for better contrast on dark */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+/* Animations */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-highlight.glass-morph {
+    flex-direction: column;
+    padding: 2rem;
+    text-align: center;
+  }
+  .highlight-text {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+  .dashboard-highlight__metrics {
+    gap: 1rem;
+  }
+}
+
+/* Container for horizontal flash cards */
+.dashboard-summary-grid {
+  display: flex;
+  flex-direction: row; /* Left to right */
+  gap: 1.5rem;
+  margin: 2rem 0;
+  perspective: 1000px;
+}
+
+/* Base Flash Card Styling */
+.dashboard-summary-card {
+  flex: 1; /* Ensures equal width */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 20px;
+  
+  /* Modern Dark Linear Gradient */
+  background: linear-gradient(145deg, #1e2229 0%, #111318 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  
+  /* Floating Effect */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+/* Hover Interactivity */
+.dashboard-summary-card:hover {
+  transform: translateY(-10px) rotateX(2deg);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(145deg, #103621 0%, #111318 100%);
+}
+
+/* Accent version (The "Next Pickup" card) */
+.dashboard-summary-card--accent {
+  background: linear-gradient(145deg, #2a2e3a 0%, #111318 100%);
+  border: 1px solid rgba(233, 196, 131, 0.2);
+}
+
+/* Floating "Dot" Indicator */
+.card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 10px currentColor; /* Glow matches background color */
+}
+
+/* Text Visibility & Typography */
+.dashboard-summary-card__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8; /* Slate gray for readability */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-summary-card__value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 0.25rem;
+  word-wrap: break-word;
+}
+
+.dashboard-summary-card small {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 768px) {
+  .dashboard-summary-grid {
+    flex-direction: column; /* Stacks vertically on mobile */
+  }
+}
+
+/* Container Background & High-Tech Border */
+.hud-container {
+  background: #050505 ;
+  border: 1px solid rgba(6, 182, 212, 0.3) ;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.1);
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  padding-top: 2.5rem;
+}
+
+/* Hexagonal Grid Overlay */
+.hud-hex-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0.1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42' viewBox='0 0 24 42'%3E%3Cpath fill='%2306b6d4' fill-opacity='0.4' d='M12 0l12 6.928v13.856L12 27.712 0 20.784V6.928L12 0zm0 2.31L2 8.08v11.547l10 5.773 10-5.773V8.08l-10-5.77z'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+/* Header Elements */
+.hud-header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-status-blink {
+  width: 8px;
+  height: 8px;
+  background: #d946ef;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #d946ef;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.hud-eyebrow {
+  color: #06b6d4;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+}
+
+.hud-title {
+  color: #ffffff !important;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* HUD Button */
+.btn-hud {
+  background: rgba(3, 16, 30, 0.8);
+  border: 1px solid rgba(6, 182, 212, 0.7);
+  color: #06b6d4;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  border-radius: 14px;
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
+  transform-style: preserve-3d;
+  perspective: 800px;
+  z-index: 3;
+}
+
+.btn-hud:hover {
+  background: rgba(6, 182, 212, 0.15);
+  color: #ffffff;
+  box-shadow: 0 14px 35px rgba(6, 182, 212, 0.35);
+  transform: translateY(-2px) rotateX(4deg) rotateY(2deg);
+}
+
+.btn-hud:active {
+  transform: translateY(0px) rotateX(2deg) rotateY(1deg);
+}
+
+/* Tooltip Scanned Look */
+.hud-tooltip {
+  background: rgba(10, 10, 10, 0.9);
+  border: 1px solid #06b6d4;
+  padding: 10px;
+  position: relative;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+}
+
+.hud-tag {
+  color: #94a3b8;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-size: 0.7rem;
+  margin: 0;
+}
+
+.hud-val {
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+.hud-scanner-line {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 2px;
+  background: #46efa0;
+  box-shadow: 0 0 10px #4ef17f;
+  animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+
+
+
+/* Container Grid */
+.dashboard-actions-flash {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  perspective: 1000px; /* Essential for 3D depth */
+}
+
+/* The Flash Card - Fixed 3D Effect */
+.flash-card-3d {
+  background: linear-gradient(145deg, #1a1a1a, #050505);
+  border-radius: 12px;
+  padding: 1px; /* Creates the rim-light effect */
+  position: relative;
+  cursor: pointer;
+  
+  /* Physical Depth: Outer shadow and Top-left highlight */
+  box-shadow: 
+    8px 8px 16px #020202, 
+    -2px -2px 8px rgba(255, 255, 255, 0.05);
+}
+
+.flash-card-inner {
+  background: linear-gradient(145deg, #0f172a, #050505);
+  border-radius: 11px;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  /* Inner Bevel effect */
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Icon Styling */
+.action-icon-3d {
+  font-size: 1.5rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 4px;
+}
+
+/* Typography Positioning */
+.action-content-3d {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.flash-label {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', sans-serif;
+}
+
+.flash-detail {
+  color: #94a3b8;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin: 0;
+  font-family: monospace;
+}
+
+/* Header refinement */
+.section-title.hud-eyebrow {
+  border-left: 3px solid #06b6d4;
+  padding-left: 12px;
+}
+
+
+
+
+/* Container & Grid Setup */
+  .grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem;
+  
+  /* Modern Linear Gradient Background */
+  background: linear-gradient(to bottom, #fdfdfd 20%, #c5f1e4 100%);
+  
+  /* Ensuring the container fills the viewport if needed */
+  min-height: 100vh;
+}
+
+
+/* Modern Dark Panel (The Card) */
+.dashboard-section-card {
+  background: #1a1d27;
+  border: 1px solid #2d3245;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease;
+}
+
+/* Header Styling */
+.dashboard-section-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #2d3245;
+  padding-bottom: 1rem;
+}
+
+.dashboard-section-card__header h2 {
+  color: #f1f5f9;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* The List Items */
+.dashboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dashboard-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem;
+  border-radius: 8px;
+  background: #232734;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard-list__item:hover {
+  background: #2a2f3e;
+  border-color: #3b82f6; /* Subtle blue highlight on hover */
+  transform: translateX(4px);
+}
+
+/* Typography */
+.list-item-title {
+  color: #e2e8f0;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+}
+
+.list-item-subtitle {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.btn-ghost {
+  /* Reset and Base Styles */
+  appearance: none;
+  border: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  
+  /* Fixed Color */
+  background: #1e9258;
+  color: white;
+  
+  /* The 3D "Depth" Shadow - now permanent */
+  box-shadow: 0 4px 0px 0px #034906; 
+  
+  /* Positioning it slightly up to account for the shadow depth */
+  transform: translateY(-2px); 
+  
+  /* Disable pointer interactions so it doesn't feel like a button */
+  cursor: default;
+  pointer-events: none; 
+  
+  position: relative;
+  display: inline-block;
+}
+
+/* 
+   Note: All :hover and :active states have been removed. 
+   pointer-events: none; ensures the browser ignores clicks 
+   and prevents the color/position from changing.
+*/
+
+
+
+
+
+/* Empty State */
+.dashboard-empty {
+  color: #64748b;
+  text-align: center;
+  padding: 2rem 0;
+  font-style: italic;
+}

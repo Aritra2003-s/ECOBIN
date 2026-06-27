@@ -1,0 +1,173 @@
+/* ── Main Layout ── */
+.tracking-container {
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+}
+
+.tracking-grid {
+  display: grid;
+  /* Columns will fit naturally unless space is constrained */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Pickup List Column ── */
+.pickup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pickup-card {
+  cursor: pointer;
+  border: 1px solid #333333;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pickup-card:hover {
+  box-shadow: 0 4px 12px rgba(255, 77, 0, 0.15);
+  border-color: rgba(255, 77, 0, 0.4);
+  background: rgba(255, 77, 0, 0.05);
+}
+
+/* Border overrides regular card border when selected */
+.pickup-card.selected {
+  border: 2px solid #FF4D00;
+}
+
+.pickup-card-title {
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #FFFFFF;
+}
+
+.pickup-card-text {
+  font-size: 13px;
+  color: #808080;
+  margin: 0;
+}
+
+.pickup-card-subtext {
+  font-size: 13px;
+  color: #B0B0B0;
+  margin: 4px 0 0 0;
+}
+
+/* ── Details Card Area ── */
+.details-card {
+  position: sticky;
+  top: 80px; /* Adjust this value if you have a fixed top navbar */
+}
+
+.details-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 0 20px 0;
+}
+
+/* ── Progress Tracker ── */
+.progress-container {
+  margin-bottom: 24px;
+}
+
+.progress-track {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.progress-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  z-index: 1;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.progress-icon.done {
+  background: #FF4D00;
+  color: #fff;
+}
+
+.progress-icon.pending {
+  background: #333333;
+  color: #808080;
+}
+
+.progress-label {
+  font-size: 10px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.progress-label.done {
+  color: #FF4D00;
+}
+
+.progress-label.pending {
+  color: #808080;
+}
+
+/* ── Detail Rows ── */
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #333333;
+  padding-bottom: 8px;
+  gap: 12px;
+}
+
+.detail-label {
+  color: #808080;
+}
+
+.detail-value {
+  font-weight: 500;
+  text-align: right;
+  text-transform: capitalize;
+  color: #FFFFFF;
+}
+
+/* ── Responsive Adjustments ── */
+@media (max-width: 768px) {
+  .tracking-grid {
+    grid-template-columns: 1fr; /* Stack columns vertically on mobile */
+  }
+  
+  .details-card {
+    position: static; /* Removes sticky positioning so it flows naturally */
+    margin-top: 12px;
+  }
+  
+  /* Prevent progress tracker text/icons from overlapping on very small screens */
+  .progress-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+  
+  .progress-label {
+    font-size: 9px;
+  }
+}

@@ -1,0 +1,266 @@
+/* Inherits container styles directly from your shared framework specs */
+.pickup-request-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  background: linear-gradient(135deg, #f4f7f9 0%, #d6e2f1 100%) !important; /* Clean light gradient background */
+  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  color: #1a202c;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+/* Forces layout stacking so subtext lines up exactly under the title */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f2d4a;
+  margin: 0;
+  display: block;
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: #4a5568;
+  margin: 0;
+  display: block;
+  line-height: 1.4;
+}
+
+.pickup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Upgraded to a highly legible, ultra-light linear gradient */
+.card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(240, 244, 248, 0.75) 100%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #cbd5e0;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.section-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.text-green {
+  color: #22543d;
+}
+
+/* Specific component selection isolation override */
+.pickup-request-container .section-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #1a202c !important;
+  margin: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.mt-12 {
+  margin-top: 16px;
+}
+
+/* Placed right below .mt-12 definition block */
+.address-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.form-input {
+  width: 100%;
+  height: 48px;
+  border: 1px solid #a0aec0;
+  border-radius: 6px;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a202c;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #1a202c;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.textarea-input {
+  height: auto;
+  padding: 10px 12px;
+  resize: none;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #1a202c;
+  pointer-events: none;
+}
+
+.select-wrapper select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 32px;
+  width: 100%;
+}
+
+/* Modified Dropzone: Constant light background, no hover change, clean border */
+.pickup-request-container .upload-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  border: 2px dashed #cbd5e0 !important; /* Changed from red hint to clean neutral gray border */
+  border-radius: 8px;
+  background-color: #f8fafc !important; /* Forces your crisp light background */
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Ensure the upload text remains perfectly dark and readable */
+.pickup-request-container .dropzone-text {
+  color: #1a202c !important;
+}
+
+.pickup-request-container .dropzone-subtext {
+  color: #718096 !important;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.dropzone-icon-wrapper svg {
+  width: 32px;
+  height: 32px;
+  color: #4a5568; /* Balanced neutral gray icon color */
+  margin-bottom: 8px;
+}
+
+.image-badges-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.image-badge {
+  background-color: #064e3b;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.btn-submit-full {
+  width: 100%;
+  background-color: #064e3b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 14px 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.btn-submit-full:hover {
+  background-color: #022c22;
+}
+
+.footer-notice {
+  font-size: 12px;
+  color: #4a5568;
+  text-align: center;
+  margin-top: 12px;
+}
+
+/* ==========================================================================
+   Responsive Design Breakpoints
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .pickup-request-container {
+    padding: 24px 12px;
+    border-radius: 0px; /* Seamless look on medium/small tablet displays */
+  }
+}
+
+@media (max-width: 540px) {
+  .page-title {
+    font-size: 22px;
+  }
+  
+  .page-subtitle {
+    font-size: 13px;
+  }
+
+  .card {
+    padding: 16px; /* Tightens card spacing slightly to save screen estate */
+  }
+
+  /* Safely collapses side-by-side grid rows into full width stacked inputs */
+  .address-row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .mt-12 {
+    margin-top: 12px;
+  }
+}

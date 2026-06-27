@@ -1,0 +1,141 @@
+.app-navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: var(--navbar-height);
+  background: linear-gradient(90deg, #d7f7e1 0%, #eff6ff 50%, #bfebec 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 40;
+}
+
+@media (min-width: 1024px) {
+  .app-navbar {
+    left: var(--sidebar-width);
+  }
+}
+
+.app-navbar__primary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app-navbar__menu {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.app-navbar__menu:hover {
+  background: #f1f5f9;
+}
+
+.app-navbar__eyebrow {
+  /* Layout & Sizing */
+  font-size: 1.25rem; /* Standard eyebrow size is usually small */
+  margin: 0;
+  
+  /* Boldness & Typography */
+  font-weight: 700; /* Extra bold */
+  text-transform: uppercase;
+  letter-spacing: 0em; /* Increased spacing for better readability when bold */
+  
+  /* Gradient Implementation */
+  background: linear-gradient(135deg, #19243b 0%, #099466 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  
+  /* Ensures no clipping on descenders */
+  display: inline-block;
+}
+
+.app-navbar__title {
+  font-size: 1.1rem; /* Compact and clean */
+  font-weight: 700;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Subtle text gradient for a pro look */
+}
+
+.app-navbar__actions {
+  display: flex;
+  align-items: center;
+}
+
+.app-navbar__user {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+.app-navbar__user-copy {
+  text-align: right;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .app-navbar__user-copy {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.app-navbar__user-copy strong {
+  font-size: 0.875rem;
+  color: #1e293b;
+}
+
+
+.app-navbar__role {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.6rem;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  color: #10b981;
+  font-weight: 700; /* Slightly bolder for readability at small size */
+  text-transform: uppercase;
+  letter-spacing: 0.025em; /* Better spacing for uppercase text */
+  border-radius: 6px; /* Squarer to match your brand-mark and 3D buttons */
+}
+
+.app-navbar__avatar {
+  width: 34px;
+  height: 34px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px; /* Matching the sidebar brand-mark radius */
+  border: 2px solid white; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+/* Hover effect to make it feel interactive */
+.app-navbar__avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.15);
+}

@@ -1,0 +1,62 @@
+/* ── Main Container ── */
+.user-management-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ── Page Header ── */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  color: var(--text-primary, #111827);
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary, #4b5563);
+  margin: 0;
+}
+
+/* ── Search Input ── */
+.search-input {
+  width: 260px;
+}
+
+/* ── Table Cell Data ── */
+.user-info-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+}
+
+.user-email {
+  font-size: 12px;
+  color: var(--text-muted, #9ca3af);
+  margin-top: 2px;
+}
+
+/* ── Responsive Adjustments ── */
+@media (max-width: 640px) {
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-input {
+    width: 100%; /* Make search input full width on mobile */
+  }
+}

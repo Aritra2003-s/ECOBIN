@@ -1,0 +1,26 @@
+.chart-container {
+  width: 100%;
+}
+
+.chart-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+/* Recharts customization via CSS */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #f0f0f0;
+}
+
+.recharts-text {
+  font-size: 12px;
+}
+
+.recharts-default-tooltip {
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  border: 1px solid #ebebeb !important;
+}
