@@ -16,8 +16,7 @@ router.use(protect);
 router.post('/',
   [
     body('wasteType').notEmpty().withMessage('Waste type is required'),
-    body('quantity.value').isNumeric().withMessage('Quantity must be a number'),
-    body('preferredDate').isISO8601().withMessage('Valid date is required'),
+    body('preferredDate').notEmpty().withMessage('Valid pickup date is required'),
   ],
   validate,
   createPickup

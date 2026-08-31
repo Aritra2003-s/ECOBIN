@@ -1,82 +1,172 @@
-/* ── Page Layout ── */
-.analytics-page {
+/* ==========================================================================
+   EcoBin • Analytics SaaS Styles
+   ========================================================================== */
+
+.analytics-saas-page {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 24px;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
 }
 
-/* ── Header ── */
-.page-header {
+.analytics-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 24px;
-  gap: 16px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.page-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 4px 0;
-  color: var(--text-primary, #111827);
-}
-
-.page-subtitle {
-  font-size: 14px;
-  color: var(--text-secondary, #4b5563);
+.analytics-header .page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-heading, #0F172A);
   margin: 0;
 }
 
-.period-select {
-  width: 160px;
+.telemetry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: #ECFDF5;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #065F46;
 }
 
-/* ── Spacing Utilities ── */
-.section-mb {
-  margin-bottom: 28px;
+.analytics-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-/* ── Charts ── */
-.chart-card {
-  padding: 20px; /* Assuming your default .card class doesn't have chart-specific padding */
+.analytics-kpi-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+  transition: all 0.25s ease;
 }
 
-.chart-title {
-  font-weight: 600;
-  font-size: 15px;
-  margin: 0 0 16px 0;
-  color: var(--text-primary, #111827);
+.analytics-kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primary, #10B981);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.1);
 }
 
-/* ── Grids (Responsive) ── */
-.grid-4 {
+.kpi-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.kpi-number {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.4vw, 2.2rem);
+  font-weight: 800;
+  color: #0F172A;
+  margin: 6px 0 4px;
+  line-height: 1.15;
+}
+
+.kpi-sub {
+  font-size: 0.78rem;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.growth-tag {
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+}
+
+.growth-tag.green {
+  background: #DCFCE7;
+  color: #15803D;
+}
+
+.analytics-charts-grid {
   display: grid;
-  /* Fits up to 4 columns automatically based on container width */
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 24px;
 }
 
-.grid-2 {
-  display: grid;
-  /* Fits up to 2 columns automatically based on container width */
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
+.analytics-chart-panel {
+  padding: 26px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 22px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03);
 }
 
-/* ── Responsive Adjustments ── */
-@media (max-width: 640px) {
-  .page-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .period-select {
-    width: 100%; /* Full width select on mobile */
+.chart-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.panel-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--color-primary, #10B981);
+}
+
+.chart-panel-header h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 4px 0 0;
+}
+
+.active-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.analytics-chart-tooltip {
+  padding: 10px 14px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #ffffff;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+  .analytics-charts-grid {
+    grid-template-columns: 1fr;
   }
 
-  .grid-4, .grid-2 {
-    grid-template-columns: 1fr; /* Force single column on smaller screens */
+  .analytics-metrics-grid {
+    grid-template-columns: 1fr;
   }
 }

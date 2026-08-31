@@ -22,7 +22,7 @@ router.post('/classify-text',
 );
 
 router.post('/classify-image',
-  upload.single('image'),
+  upload.any(),
   classifyFromImage
 );
 

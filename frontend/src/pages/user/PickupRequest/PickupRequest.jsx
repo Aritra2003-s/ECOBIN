@@ -1,47 +1,66 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { pickupApi } from '../../../api/pickupApi';
 import useToast from '../../../hooks/useToast';
-import { WASTE_CATEGORIES, TIME_SLOTS, QUANTITY_UNITS } from '../../../utils/constants';
 import './PickupRequest.css';
+
+const CATEGORY_OPTIONS = [
+  { id: 'general', label: 'General Dry Waste', icon: '🗑️', desc: 'Mixed packaging & non-recyclables' },
+  { id: 'plastic', label: 'Rigid & Soft Plastics', icon: '🥤', desc: 'PET bottles, containers, HDPE' },
+  { id: 'organic', label: 'Organic Compost', icon: '🍃', desc: 'Food scrap, yard cuttings, coffee' },
+  { id: 'paper', label: 'Paper & Cardboard', icon: '📦', desc: 'Corrugated cartons, newspapers' },
+  { id: 'e_waste', label: 'Electronic E-Waste', icon: '💻', desc: 'Batteries, cables, broken devices' },
+  { id: 'hazardous', label: 'Hazardous Materials', icon: '⚠️', desc: 'Chemicals, paints, fluorescent bulbs' },
+  { id: 'metal', label: 'Scrap & Metal Cans', icon: '🔩', desc: 'Aluminum tins, iron scraps, wires' },
+];
+
+const TIME_SLOT_OPTIONS = [
+  { id: 'morning', label: 'Morning Window', time: '08:00 AM – 12:00 PM', icon: '🌅' },
+  { id: 'afternoon', label: 'Afternoon Window', time: '12:00 PM – 04:00 PM', icon: '☀️' },
+  { id: 'evening', label: 'Evening Window', time: '04:00 PM – 08:00 PM', icon: '🌆' },
+];
 
 export default function PickupRequest() {
   const toast = useToast();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  
+
   const [form, setForm] = useState({
-    wasteType: 'general',
-    quantity: { value: '', unit: 'kg' }, 
+    wasteType: 'plastic',
+    quantity: { value: '5', unit: 'kg' },
     description: '',
     pickupAddress: { street: '', city: '', state: '', zip: '' },
-    preferredDate: '',
+    preferredDate: new Date(Date.now() + 86400000).toISOString().split('T')[0],
     preferredTimeSlot: 'morning',
   });
 
   const set = (field) => (e) => setForm((p) => ({ ...p, [field]: e.target.value }));
   const setAddr = (field) => (e) =>
     setForm((p) => ({ ...p, pickupAddress: { ...p.pickupAddress, [field]: e.target.value } }));
-    
-  const setQty = (field) => (e) => {
-    const rawValue = e.target.value;
+  const setWasteType = (type) => setForm((p) => ({ ...p, wasteType: type }));
+  const setSlot = (slot) => setForm((p) => ({ ...p, preferredTimeSlot: slot }));
+
+  const setQty = (field, val) => {
     setForm((p) => ({
       ...p,
-      quantity: { 
-        ...p.quantity, 
-        [field]: field === 'value' ? (rawValue === '' ? '' : Number(rawValue)) : rawValue 
-      }
+      quantity: { ...p.quantity, [field]: val },
     }));
   };
 
+  // Estimated CO2 Avoidance
+  const numericQty = parseFloat(form.quantity.value) || 0;
+  const estimatedCO2 = (numericQty * 1.35).toFixed(1);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Validations
+
     if (!form.pickupAddress.street.trim() || !form.pickupAddress.city.trim()) {
-      toast.error('Street and City are required.');
+      toast.error('Street and City address are required.');
       return;
     }
-    if (form.quantity.value === '' || form.quantity.value < 0) {
-      toast.error('Please enter a valid quantity amount.');
+    if (!form.quantity.value || numericQty <= 0) {
+      toast.error('Please enter a valid quantity.');
       return;
     }
     if (!form.preferredDate) {
@@ -51,195 +70,282 @@ export default function PickupRequest() {
 
     setLoading(true);
     try {
-      // Explicit payload mapping to eliminate any undefined parameters
       const payload = {
         wasteType: form.wasteType,
         quantity: {
-          value: Number(form.quantity.value),
-          unit: form.quantity.unit.toLowerCase(), // Normalizes enum compliance
+          value: numericQty,
+          unit: form.quantity.unit.toLowerCase(),
         },
-        description: form.description.trim() || "",
+        description: form.description.trim() || '',
         pickupAddress: {
           street: form.pickupAddress.street.trim(),
           city: form.pickupAddress.city.trim(),
-          state: form.pickupAddress.state.trim() || "",
-          zip: form.pickupAddress.zip.trim() || "",
+          state: form.pickupAddress.state.trim() || '',
+          zip: form.pickupAddress.zip.trim() || '',
         },
-        preferredDate: new Date(form.preferredDate).toISOString(), // Standardizes ISO date format
+        preferredDate: new Date(form.preferredDate).toISOString(),
         preferredTimeSlot: form.preferredTimeSlot,
       };
 
       await pickupApi.create(payload);
-      toast.success('Pickup request submitted! We will review it shortly.');
-      
-      // Reset form fields
-      setForm({
-        wasteType: 'general', 
-        quantity: { value: '', unit: 'kg' }, 
-        description: '',
-        pickupAddress: { street: '', city: '', state: '', zip: '' },
-        preferredDate: '', 
-        preferredTimeSlot: 'morning',
-      });
+      toast.success('Pickup request confirmed! Live GPS tracking will activate upon driver dispatch.');
+      navigate('/pickup-tracking');
     } catch (err) {
-      toast.error(err.response?.data?.message || err.message || 'Validation failed');
+      toast.error(err.response?.data?.message || err.message || 'Booking failed');
     } finally {
       setLoading(false);
     }
   };
 
-  return (
-    <div className="pickup-request-container">
-      <div className="page-header">
-        <h1 className="page-title">Request Pickup</h1>
-        <p className="page-subtitle">Schedule a waste collection at your location.</p>
-      </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+  };
 
-      <form onSubmit={handleSubmit} className="pickup-form">
-        
-        {/* SECTION 1: WASTE DETAILS CARD */}
-        <div className="card form-card-section">
-          <div className="section-header">
-            <svg className="section-icon text-green" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-            <h3 className="section-title">Waste Details</h3>
+  const itemVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  return (
+    <motion.div
+      className="pickup-request-saas-page"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* ── Page Header ───────────────────────────────────────── */}
+      <motion.div className="pickup-req-header" variants={itemVariants}>
+        <div>
+          <div className="header-badge-row">
+            <h1 className="page-title">Book On-Demand Curbside Pickup</h1>
+            <span className="dispatch-badge">
+              <span className="pulse-dot"></span>
+              <span>Municipal Fleet Active</span>
+            </span>
           </div>
-          
-          <div className="form-group">
-            <label className="form-label">Waste type *</label>
-            <div className="select-wrapper">
-              <select className="form-input" value={form.wasteType} onChange={set('wasteType')}>
-                {WASTE_CATEGORIES.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
-              </select>
+          <p className="page-subtitle">
+            Schedule convenient home or commercial collections with verified material circularity.
+          </p>
+        </div>
+      </motion.div>
+
+      <form onSubmit={handleSubmit} className="pickup-booking-layout">
+        {/* ── Left Column: Configuration Forms ─────────────────── */}
+        <div className="booking-main-col">
+          {/* Step 1: Category Picker */}
+          <motion.div className="booking-card glass-panel" variants={itemVariants}>
+            <div className="booking-card-header">
+              <span className="step-tag">STEP 01</span>
+              <h3>Select Waste Classification</h3>
             </div>
-          </div>
-          
-          <div className="form-group">
-            <label className="form-label">Quantity *</label>
-            <div className="quantity-group">
-              <input 
-                className="quantity-input" 
-                type="number" 
-                step="0.01"
-                min="0" 
-                placeholder="0.00"
-                value={form.quantity.value} 
-                onChange={setQty('value')} 
-              />
-              <div className="select-wrapper quantity-select-wrapper">
-                <select 
-                  className="quantity-select" 
-                  value={form.quantity.unit} 
-                  onChange={setQty('unit')}
+
+            <div className="category-options-grid">
+              {CATEGORY_OPTIONS.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  className={`category-select-card ${form.wasteType === cat.id ? 'active' : ''}`}
+                  onClick={() => setWasteType(cat.id)}
                 >
-                  {QUANTITY_UNITS.map((u) => <option key={u.value} value={u.value}>{u.label}</option>)}
-                </select>
+                  <div className="cat-icon-row">
+                    <span className="cat-emoji">{cat.icon}</span>
+                    {form.wasteType === cat.id && <span className="cat-check">✓</span>}
+                  </div>
+                  <strong>{cat.label}</strong>
+                  <p>{cat.desc}</p>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Step 2: Quantity & Schedule */}
+          <motion.div className="booking-card glass-panel" variants={itemVariants}>
+            <div className="booking-card-header">
+              <span className="step-tag">STEP 02</span>
+              <h3>Estimated Quantity & Date Slot</h3>
+            </div>
+
+            <div className="booking-form-grid">
+              <div className="form-group">
+                <label className="form-label">Approximate Amount</label>
+                <div className="quantity-input-group">
+                  <input
+                    type="number"
+                    min="1"
+                    className="form-input"
+                    placeholder="5"
+                    value={form.quantity.value}
+                    onChange={(e) => setQty('value', e.target.value)}
+                  />
+                  <select
+                    className="form-select qty-select"
+                    value={form.quantity.unit}
+                    onChange={(e) => setQty('unit', e.target.value)}
+                  >
+                    <option value="kg">Kilograms (kg)</option>
+                    <option value="lbs">Pounds (lbs)</option>
+                    <option value="bags">Bags / Sacks</option>
+                    <option value="items">Units / Items</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Preferred Collection Date</label>
+                <input
+                  type="date"
+                  className="form-input"
+                  min={new Date().toISOString().split('T')[0]}
+                  value={form.preferredDate}
+                  onChange={set('preferredDate')}
+                />
               </div>
             </div>
-          </div>
 
-          <div className="form-group mt-12">
-            <label className="form-label label-optional">Description (optional)</label>
-            <textarea 
-              className="form-input vertical-resize textarea-input" 
-              rows={3}
-              placeholder="Any special instructions for the pickup team..."
-              value={form.description} 
-              onChange={set('description')}
-            />
-          </div>
-        </div>
+            {/* Time Slot Selector */}
+            <div className="time-slot-section">
+              <label className="form-label">Select Driver Window</label>
+              <div className="time-slots-grid">
+                {TIME_SLOT_OPTIONS.map((slot) => (
+                  <button
+                    key={slot.id}
+                    type="button"
+                    className={`time-slot-btn ${form.preferredTimeSlot === slot.id ? 'active' : ''}`}
+                    onClick={() => setSlot(slot.id)}
+                  >
+                    <div className="slot-top">
+                      <span>{slot.icon}</span>
+                      <strong>{slot.label}</strong>
+                    </div>
+                    <span className="slot-hours">{slot.time}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
-        {/* SECTION 2: PICKUP ADDRESS CARD */}
-        <div className="card form-card-section">
-          <div className="section-header">
-            <svg className="section-icon text-green" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <h3 className="section-title">Pickup address</h3>
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">Street address *</label>
-            <input 
-              className="form-input" 
-              placeholder="123 Eco Street"
-              value={form.pickupAddress.street} 
-              onChange={setAddr('street')} 
-            />
-          </div>
-
-          <div className="form-group mt-12">
-            <label className="form-label">City *</label>
-            <input 
-              className="form-input" 
-              placeholder="Greenfield"
-              value={form.pickupAddress.city} 
-              onChange={setAddr('city')} 
-            />
-          </div>
-
-          <div className="address-row mt-12">
-            <div className="form-group">
-              <label className="form-label label-gray">State</label>
-              <input 
-                className="form-input" 
-                placeholder="WA"
-                value={form.pickupAddress.state} 
-                onChange={setAddr('state')} 
-              />
+          {/* Step 3: Pickup Location */}
+          <motion.div className="booking-card glass-panel" variants={itemVariants}>
+            <div className="booking-card-header">
+              <span className="step-tag">STEP 03</span>
+              <h3>Curbside Pickup Location</h3>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Zip code</label>
-              <input 
-                className="form-input" 
-                placeholder="98101"
-                value={form.pickupAddress.zip} 
-                onChange={setAddr('zip')} 
-              />
+            <div className="booking-form-grid">
+              <div className="form-group span-2">
+                <label className="form-label">Street Address & Landmark *</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="e.g. 742 Evergreen Terrace, Gate 2"
+                  value={form.pickupAddress.street}
+                  onChange={setAddr('street')}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">City *</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="City name"
+                  value={form.pickupAddress.city}
+                  onChange={setAddr('city')}
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label">Postal / ZIP Code</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="e.g. 90210"
+                  value={form.pickupAddress.zip}
+                  onChange={setAddr('zip')}
+                />
+              </div>
+
+              <div className="form-group span-2">
+                <label className="form-label">Special Driver Instructions (Optional)</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  placeholder="e.g. Left beside front driveway, ring bell upon arrival"
+                  value={form.description}
+                  onChange={set('description')}
+                />
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* SECTION 3: SCHEDULE CARD */}
-        <div className="card form-card-section">
-          <div className="section-header">
-            <svg className="section-icon text-green" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <h3 className="section-title">Schedule</h3>
-          </div>
-
-          <div className="form-group">
-            <label className="form-label">Preferred date *</label>
-            <input 
-              className="form-input date-input" 
-              type="date"
-              value={form.preferredDate} 
-              onChange={set('preferredDate')} 
-            />
-          </div>
-          <div className="form-group">
-            <label className="form-label label-gray">Preferred time slot</label>
-            <div className="select-wrapper">
-              <select 
-                className="form-input" 
-                value={form.preferredTimeSlot} 
-                onChange={set('preferredTimeSlot')}
-              >
-                {TIME_SLOTS.map((t) => <option key={t.value} value={t.value}>{t.label}</option>)}
-              </select>
+        {/* ── Right Column: Booking Summary & Impact Estimator ──── */}
+        <div className="booking-summary-sidebar">
+          <motion.div className="booking-summary-card glass-panel" variants={itemVariants}>
+            <div className="summary-card-header">
+              <span className="summary-tag">BOOKING TELEMETRICS</span>
+              <h4>Request Summary</h4>
             </div>
-          </div>
-        </div>
 
-        <button className="btn-submit-full" type="submit" disabled={loading}>
-          {loading ? 'Submitting…' : 'Request pickup'}
-        </button>
+            <div className="summary-details-list">
+              <div className="summary-row">
+                <span>Material:</span>
+                <strong>{CATEGORY_OPTIONS.find((c) => c.id === form.wasteType)?.label}</strong>
+              </div>
+              <div className="summary-row">
+                <span>Quantity:</span>
+                <strong>{form.quantity.value || 0} {form.quantity.unit}</strong>
+              </div>
+              <div className="summary-row">
+                <span>Scheduled Date:</span>
+                <strong>{form.preferredDate ? new Date(form.preferredDate).toLocaleDateString() : '—'}</strong>
+              </div>
+              <div className="summary-row">
+                <span>Time Slot:</span>
+                <strong>{TIME_SLOT_OPTIONS.find((s) => s.id === form.preferredTimeSlot)?.label}</strong>
+              </div>
+            </div>
+
+            {/* Impact Estimator Box */}
+            <div className="summary-impact-box">
+              <div className="impact-top">
+                <span>🌱</span>
+                <strong>Estimated Environmental ROI</strong>
+              </div>
+              <div className="impact-stats-row">
+                <div>
+                  <span className="impact-num">{estimatedCO2} kg</span>
+                  <span className="impact-label">CO2 Avoided</span>
+                </div>
+                <div>
+                  <span className="impact-num">100%</span>
+                  <span className="impact-label">Recycle Verified</span>
+                </div>
+              </div>
+            </div>
+
+            <motion.button
+              type="submit"
+              className="btn-saas-confirm-booking"
+              disabled={loading}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {loading ? (
+                <span>Locking Dispatch Route...</span>
+              ) : (
+                <>
+                  <span>Confirm Pickup Request</span>
+                  <span>→</span>
+                </>
+              )}
+            </motion.button>
+          </motion.div>
+        </div>
       </form>
-    </div>
+    </motion.div>
   );
 }

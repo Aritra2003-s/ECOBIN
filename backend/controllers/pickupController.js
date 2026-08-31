@@ -23,14 +23,26 @@ export const createPickup = async (req, res, next) => {
   try {
     const { wasteType, quantity, description, pickupAddress, preferredDate, preferredTimeSlot } = req.body;
 
+    let parsedAddress = pickupAddress;
+    if (typeof pickupAddress === 'string') {
+      try {
+        parsedAddress = JSON.parse(pickupAddress);
+      } catch {
+        parsedAddress = { street: pickupAddress, city: 'City' };
+      }
+    }
+
     const pickup = await PickupRequest.create({
       requestedBy: req.user._id,
-      wasteType,
-      quantity,
-      description,
-      pickupAddress: typeof pickupAddress === 'string' ? JSON.parse(pickupAddress) : pickupAddress,
-      preferredDate,
-      preferredTimeSlot,
+      wasteType: wasteType || 'general',
+      quantity: {
+        value: typeof quantity === 'object' ? Number(quantity?.value || 1) : Number(quantity || 1),
+        unit: (typeof quantity === 'object' && quantity?.unit) ? quantity.unit.toLowerCase() : 'kg',
+      },
+      description: description || '',
+      pickupAddress: parsedAddress,
+      preferredDate: preferredDate ? new Date(preferredDate) : new Date(),
+      preferredTimeSlot: preferredTimeSlot || 'morning',
     });
 
     res.status(201).json(new ApiResponse(201, { pickup }, 'Pickup request submitted.'));
@@ -46,7 +58,15 @@ export const getPickups = async (req, res, next) => {
     const filter = {};
 
     if (req.user.role !== 'admin') filter.requestedBy = req.user._id;
-    if (status)    filter.status = status;
+    if (status) {
+      if (Array.isArray(status)) {
+        filter.status = { $in: status };
+      } else if (typeof status === 'string' && status.includes(',')) {
+        filter.status = { $in: status.split(',').map((s) => s.trim()) };
+      } else {
+        filter.status = status;
+      }
+    }
     if (wasteType) filter.wasteType = wasteType;
 
     const skip = (Number(page) - 1) * Number(limit);

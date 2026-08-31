@@ -1,64 +1,102 @@
-/* ── Main Container ── */
-.history-container {
+/* ==========================================================================
+   EcoBin • History SaaS Styles
+   ========================================================================== */
+
+.history-saas-page {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
 }
 
-/* ── Typography Utilities ── */
-.capitalize-text {
-  text-transform: capitalize;
+.history-header .page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-heading, #0F172A);
+  margin: 0;
 }
 
-/* ── Tabs Layout ── */
-.history-tabs-container {
+.history-controls-row {
   display: flex;
-  gap: 4px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #333333;
-  
-  /* Enables smooth horizontal scrolling if many tabs are added later */
-  overflow-x: auto; 
-  -webkit-overflow-scrolling: touch;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.history-tabs {
+  display: flex;
+  background: #ffffff;
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid #E2E8F0;
+  gap: 6px;
 }
 
 .history-tab-btn {
-  padding: 10px 20px;
+  padding: 9px 18px;
+  border-radius: 10px;
   border: none;
-  background: none;
-  font-weight: 400;
-  color: #808080;
-  border-bottom: 2px solid transparent;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748B;
   cursor: pointer;
-  font-size: 14px;
-  text-transform: capitalize;
-  /* Negative margin pulls the border down to perfectly overlap the container's bottom border */
-  margin-bottom: -2px; 
-  transition: all 0.15s ease;
-  font-family: inherit;
-  white-space: nowrap;
-}
-
-.history-tab-btn:hover {
-  color: #CCCCCC;
+  transition: all 0.2s ease;
 }
 
 .history-tab-btn.active {
-  font-weight: 600;
-  color: #02570d;
-  border-bottom: 2px solid #FF4D00;
+  background: #ECFDF5;
+  color: #065F46;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.12);
 }
 
-/* ── Responsive Adjustments ── */
-@media (max-width: 480px) {
-  .history-tabs-container {
-    justify-content: space-between; /* Spreads tabs evenly on mobile */
+.history-search-input {
+  min-width: 320px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1.5px solid #E2E8F0;
+  font-size: 0.88rem;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.history-search-input:focus {
+  border-color: var(--color-primary, #10B981);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.history-table-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+}
+
+.cell-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: #64748B;
+  text-transform: capitalize;
+}
+
+@media (max-width: 768px) {
+  .history-controls-row {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  .history-tab-btn {
-    flex: 1; /* Makes the buttons stretch to fill the space */
-    text-align: center;
-    padding: 10px 12px; /* Slightly reduced padding to prevent overflow */
+
+  .history-search-input {
+    width: 100%;
+    min-width: 0;
   }
 }

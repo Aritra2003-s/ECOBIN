@@ -1,64 +1,198 @@
-/* ── Page Layout ── */
-.insights-page {
+/* ==========================================================================
+   EcoBin • AI Insights SaaS Styles
+   ========================================================================== */
+
+.ai-insights-saas-page {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 24px;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
 }
 
-/* ── Header ── */
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 24px;
-  gap: 16px;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 4px 0;
-  color: var(--text-primary, #111827);
-}
-
-.page-subtitle {
-  font-size: 14px;
-  color: var(--text-secondary, #4b5563);
+.insights-header .page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-heading, #0F172A);
   margin: 0;
 }
 
-/* ── Filters ── */
-.filter-container {
+.neural-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: #ECFDF5;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #065F46;
+}
+
+.insights-controls-row {
   display: flex;
+  align-items: center;
+}
+
+.filter-pills {
+  display: flex;
+  background: #ffffff;
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid #E2E8F0;
   gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
+  overflow-x: auto;
 }
 
-.filter-btn {
-  text-transform: capitalize;
+.filter-pill-btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
-/* ── Grid Layout (Responsive) ── */
-.grid-2 {
+.filter-pill-btn.active {
+  background: #0F172A;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+.insights-masonry-grid {
   display: grid;
-  /* Automatically fits as many 300px min-width columns as possible, up to the max width */
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
-/* ── Responsive Adjustments ── */
-@media (max-width: 640px) {
-  .page-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .page-header .btn {
-    width: 100%; /* Make the 'Run prediction' button full width on mobile */
-  }
+.insight-console-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+}
 
-  .grid-2 {
-    grid-template-columns: 1fr; /* Force single column on smaller screens */
+.insight-console-card.read {
+  opacity: 0.75;
+  background: #F8FAFC;
+}
+
+.insight-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.category-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #10B981;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.severity-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 9999px;
+}
+
+.severity-badge.high { background: #FEE2E2; color: #B91C1C; }
+.severity-badge.medium { background: #FEF3C7; color: #B45309; }
+.severity-badge.low { background: #ECFDF5; color: #065F46; }
+
+.insight-card-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 8px;
+}
+
+.insight-card-desc {
+  font-size: 0.85rem;
+  color: #475569;
+  line-height: 1.55;
+  margin: 0 0 20px;
+  flex-grow: 1;
+}
+
+.insight-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.insight-time {
+  font-size: 0.75rem;
+  color: #94A3B8;
+}
+
+.btn-ack-alert {
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: #ECFDF5;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #065F46;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ack-alert:hover {
+  background: #10B981;
+  color: #ffffff;
+}
+
+.insights-empty-panel {
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #E2E8F0;
+}
+
+.insights-empty-panel span {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.insights-empty-panel h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 6px;
+}
+
+.insights-empty-panel p {
+  font-size: 0.88rem;
+  color: #64748B;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .insights-masonry-grid {
+    grid-template-columns: 1fr;
   }
 }

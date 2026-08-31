@@ -1,212 +1,367 @@
-.pickup-request-container {
-  max-width: 900px; /* Increased from 540px for a more spacious layout */
+/* ==========================================================================
+   EcoBin • Pickup Request SaaS Styles
+   ========================================================================== */
+
+.pickup-request-saas-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 32px 16px;
-  /* Replaced flat background color with a beautiful, clean light gradient fill */
-  background: linear-gradient(135deg, #d3e3ee 0%, #aff0cf 100%);
-  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
-  color: #1a202c; /* Deepened dark text color */
-  border-radius: 12px; /* Optional: Adds a gentle curve to the container edges */
+  padding-bottom: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
 }
 
-.page-header {
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-size: 26px;
-  font-weight: 800; /* Bolder title contrast */
-  color: #0f2d4a;
+.pickup-req-header .page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-heading, #0F172A);
   margin: 0;
 }
 
-.page-subtitle {
-  font-size: 14px;
-  color: #4a5568; /* High-contrast subtle text */
-  margin: 4px 0 0 0;
-}
-
-.pickup-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Semi-transparent transparent card layout */
-.card {
-  background: rgba(255, 255, 255, 0.65); 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-}
-
-.section-header {
-  display: flex;
+.dispatch-badge {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid #cbd5e0;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: #ECFDF5;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #065F46;
 }
 
-.section-icon {
-  width: 20px;
-  height: 20px;
+.pickup-booking-layout {
+  display: grid;
+  grid-template-columns: 1.55fr 0.95fr;
+  gap: 28px;
+  align-items: flex-start;
 }
 
-.text-green {
-  color: #22543d; /* Enhanced dark green contrast for icons */
+.booking-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
-.pickup-request-container .section-title {
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  color: #1a202c !important; /* Forces it to override the white color */
+.booking-card {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
+}
+
+.booking-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.step-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #10B981;
+  background: #ECFDF5;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+}
+
+.booking-card-header h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0F172A;
   margin: 0;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 100%;
-}
-
-.mt-12 {
-  margin-top: 16px;
-}
-
-/* Side-by-side flex block layout for state and zip code layout */
-.address-row {
+/* Category Cards */
+.category-options-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
-.form-label {
-  font-size: 12px;
-  font-weight: 700; /* Heavy weight readability */
-  color: #1a202c;
-}
-
-.form-label.label-gray,
-.form-label.label-optional {
-  color: #4a5568; 
-  font-weight: 600;
-}
-
-/* Transparent Inputs with solid clear dark font graphics colors */
-.form-input, .quantity-input {
-  width: 100%;
-  height: 48px;
-  border: 1px solid #a0aec0;
-  border-radius: 6px;
-  padding: 12px 14px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #1a202c; /* High clarity text graphics */
-  box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.4);
-}
-
-.form-input:focus, .quantity-input:focus {
-  outline: none;
-  border-color: #1a202c;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.textarea-input {
-  height: auto;
-  padding: 10px 12px;
-  resize: none;
-}
-
-/* Quantity Configuration System */
-.quantity-group {
+.category-select-card {
+  text-align: left;
+  padding: 16px;
+  border-radius: 14px;
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s ease;
   display: flex;
-  border: 1px solid #a0aec0;
-  border-radius: 6px;
-  overflow: hidden;
-  height: 48px; /* Fixed height match with other fields */
-  background-color: rgba(255, 255, 255, 0.4);
+  flex-direction: column;
 }
 
-.quantity-group .quantity-input {
-  border: none;
-  border-radius: 0;
-  flex: 1;
-  background: transparent;
+.category-select-card:hover {
+  border-color: var(--color-primary, #10B981);
 }
 
-/* Expanded select box to prevent clipping 'kilograms', 'liters' */
-.quantity-select-wrapper {
-  border-left: 1px solid #a0aec0;
-  background-color: rgba(255, 255, 255, 0.2);
-  width: 115px; 
-  min-width: 115px;
+.category-select-card.active {
+  background: #ECFDF5;
+  border-color: var(--color-primary, #10B981);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.16);
 }
 
-.quantity-select {
-  border: none;
-  background: transparent;
-  width: 100%;
-  height: 100%;
-  padding-left: 12px;
-  padding-right: 28px; /* Room for custom indicator chevron arrow */
-  font-size: 14px;
-  font-weight: 600;
-  color: #1a202c;
-  appearance: none;
-  -webkit-appearance: none;
-  cursor: pointer;
+.cat-icon-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
-.select-wrapper, .quantity-select-wrapper {
-  position: relative;
+.cat-emoji {
+  font-size: 1.4rem;
 }
 
-.select-wrapper::after, .quantity-select-wrapper::after {
-  content: "";
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 0;
-  height: 0;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid #1a202c; /* Bold crisp layout caret symbol */
-  pointer-events: none;
+.cat-check {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #059669;
+  background: #D1FAE5;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.select-wrapper select {
-  appearance: none;
-  -webkit-appearance: none;
-  padding-right: 32px;
-}
-
-.date-input {
-  text-transform: uppercase;
-  font-size: 13px;
-}
-
-.btn-submit-full {
-  width: 100%;
-  background-color: #064e3b;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 15px;
+.category-select-card strong {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 14px 0;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 8px;
+  color: #0F172A;
+  margin-bottom: 3px;
 }
 
-.btn-submit-full:hover {
-  background-color: #022c22;
+.category-select-card p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #64748B;
+  line-height: 1.35;
+}
+
+/* Form Inputs */
+.booking-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.booking-form-grid .span-2 {
+  grid-column: span 2;
+}
+
+.quantity-input-group {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 8px;
+}
+
+.form-select.qty-select {
+  padding: 11px;
+  border-radius: 10px;
+  border: 1.5px solid #E2E8F0;
+  font-size: 0.9rem;
+  background: #ffffff;
+}
+
+.time-slot-section {
+  margin-top: 18px;
+}
+
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.time-slot-btn {
+  padding: 14px;
+  border-radius: 12px;
+  background: #F8FAFC;
+  border: 1.5px solid #E2E8F0;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.time-slot-btn:hover {
+  border-color: var(--color-primary, #10B981);
+}
+
+.time-slot-btn.active {
+  background: #ECFDF5;
+  border-color: var(--color-primary, #10B981);
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.15);
+}
+
+.slot-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.slot-top strong {
+  font-size: 0.85rem;
+  color: #0F172A;
+}
+
+.slot-hours {
+  font-size: 0.74rem;
+  color: #64748B;
+}
+
+/* ── Summary Sidebar ────────────────────────────────────────── */
+.booking-summary-sidebar {
+  position: sticky;
+  top: 90px;
+}
+
+.booking-summary-card {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.summary-card-header {
+  margin-bottom: 20px;
+}
+
+.summary-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--color-primary, #10B981);
+}
+
+.summary-card-header h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 4px 0 0;
+}
+
+.summary-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+}
+
+.summary-row span {
+  color: #64748B;
+}
+
+.summary-row strong {
+  color: #0F172A;
+  font-weight: 700;
+}
+
+.summary-impact-box {
+  background: #F0FDF4;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.impact-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #065F46;
+  margin-bottom: 10px;
+}
+
+.impact-stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.impact-num {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #10B981;
+  display: block;
+}
+
+.impact-label {
+  font-size: 0.72rem;
+  color: #047857;
+}
+
+.btn-saas-confirm-booking {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 0.98rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
+  transition: all 0.2s ease;
+}
+
+@media (max-width: 1100px) {
+  .pickup-booking-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-summary-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .category-options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .time-slots-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-form-grid .span-2 {
+    grid-column: span 1;
+  }
 }

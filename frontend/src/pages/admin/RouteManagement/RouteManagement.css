@@ -1,93 +1,243 @@
-/* Container Spacing Elements */
-.route-management-container {
-  max-width: 1200px;
+/* ==========================================================================
+   EcoBin • Route Management SaaS Styles
+   ========================================================================== */
+
+.route-mgmt-saas-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1380px;
   margin: 0 auto;
-  padding: 24px 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding-bottom: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
 }
 
-/* Modal Form Wrapping Architecture */
-.modal-form-content {
-  padding: 4px 0 0 0;
-}
-
-.modal-form-grid-container {
+.route-header {
   display: flex;
-  flex-direction: column;
-  gap: 16px; /* Tight, standardized spacing between form lines */
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-/* Fluid Form Grid Realignment */
-.responsive-form-grid {
+.route-header .page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-heading, #0F172A);
+  margin: 0;
+}
+
+.route-ai-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: #ECFDF5;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #065F46;
+}
+
+.btn-generate-routes {
+  padding: 11px 22px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+  transition: all 0.2s ease;
+}
+
+/* Telemetry Grid */
+.route-telemetry-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px; /* Match horizontal and vertical grid layout perfectly */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-/* Tightening Form Labels and Fields */
-.form-group {
+.route-telemetry-card {
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
   display: flex;
   flex-direction: column;
-  gap: 5px; /* Removes excessive gap between descriptive label and input boundary */
 }
 
-.form-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #2d3748;
-}
-
-.form-label.label-gray {
-  color: #718096;
-  font-weight: 500;
-}
-
-/* Standardized, Consistent Input Styling */
-.form-input {
-  width: 100%;
-  height: 40px;
-  border: 1px solid #cbd5e0;
-  border-radius: 6px;
-  padding: 0 12px;
-  font-size: 14px;
-  color: #2d3748;
-  background-color: #ffffff;
-  box-sizing: border-box;
-  transition: border-color 0.15s ease;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: #4a5568;
-}
-
-/* Textarea Layout Correction */
-.form-input.textarea-input {
-  height: auto;
-  padding: 10px 12px;
-  resize: none;
-}
-
-/* Browser Engine Normalization for Dates/Time Indicators */
-.form-input.date-input {
+.telemetry-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #64748B;
   text-transform: uppercase;
-  font-size: 13px;
 }
 
-/* Action Trigger Row */
-.modal-actions {
+.telemetry-number {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 4px 0 2px;
+}
+
+.telemetry-sub {
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+/* Routes Cards Grid */
+.routes-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.route-cluster-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.03);
   display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 24px;
-  border-top: 1px solid #edf2f7;
-  padding-top: 16px;
+  flex-direction: column;
 }
 
-/* Responsive Adaptive Sizing Rule */
-@media (max-width: 580px) {
-  .responsive-form-grid {
+.cluster-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.cluster-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: #F1F5F9;
+  color: #475569;
+}
+
+.cluster-name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 8px;
+}
+
+.cluster-meta-row {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: #64748B;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.waypoints-title {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #64748B;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.waypoints-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.waypoint-stop-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #F8FAFC;
+}
+
+.stop-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #E2E8F0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stop-info strong {
+  display: block;
+  font-size: 0.82rem;
+  color: #0F172A;
+  text-transform: capitalize;
+}
+
+.stop-info small {
+  font-size: 0.72rem;
+  color: #64748B;
+}
+
+.more-stops {
+  font-size: 0.75rem;
+  color: #10B981;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.routes-empty-card {
+  text-align: center;
+  padding: 60px 20px;
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid #E2E8F0;
+}
+
+.routes-empty-card span {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.routes-empty-card h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 6px;
+}
+
+.routes-empty-card p {
+  font-size: 0.88rem;
+  color: #64748B;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1100px) {
+  .routes-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .route-telemetry-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+  }
+
+  .routes-cards-grid {
+    grid-template-columns: 1fr;
   }
 }

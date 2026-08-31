@@ -1,62 +1,141 @@
-/* ── Main Container ── */
-.user-management-container {
+/* ==========================================================================
+   EcoBin • User Management SaaS Styles
+   ========================================================================== */
+
+.user-mgmt-saas-page {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  gap: 24px;
+  max-width: 1380px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
 }
 
-/* ── Page Header ── */
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 24px;
-  gap: 16px;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 0 4px 0;
-  color: var(--text-primary, #111827);
-}
-
-.page-subtitle {
-  font-size: 14px;
-  color: var(--text-secondary, #4b5563);
+.user-mgmt-header .page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-heading, #0F172A);
   margin: 0;
 }
 
-/* ── Search Input ── */
-.search-input {
-  width: 260px;
-}
-
-/* ── Table Cell Data ── */
-.user-info-cell {
+.user-controls-row {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-.user-name {
-  font-weight: 500;
-  color: var(--text-primary, #111827);
+.role-filter-tabs {
+  display: flex;
+  background: #ffffff;
+  padding: 4px;
+  border-radius: 14px;
+  border: 1px solid #E2E8F0;
+  gap: 6px;
 }
 
-.user-email {
-  font-size: 12px;
-  color: var(--text-muted, #9ca3af);
-  margin-top: 2px;
+.role-tab-btn {
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* ── Responsive Adjustments ── */
-@media (max-width: 640px) {
-  .page-header {
+.role-tab-btn.active {
+  background: #0F172A;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12);
+}
+
+.user-search-box .search-input {
+  min-width: 320px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1.5px solid #E2E8F0;
+  font-size: 0.88rem;
+  background: #ffffff;
+  outline: none;
+}
+
+.user-search-box .search-input:focus {
+  border-color: var(--color-primary, #10B981);
+}
+
+.user-table-card {
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 22px;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03);
+}
+
+.user-table-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-cell-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #ECFDF5;
+  color: #059669;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.user-cell-name {
+  display: block;
+  font-size: 0.88rem;
+  color: #0F172A;
+}
+
+.user-cell-email {
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+.role-pill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.role-pill.user {
+  background: #ECFDF5;
+  color: #065F46;
+}
+
+.role-pill.admin {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+@media (max-width: 768px) {
+  .user-controls-row {
     flex-direction: column;
     align-items: stretch;
   }
-  
-  .search-input {
-    width: 100%; /* Make search input full width on mobile */
+
+  .user-search-box .search-input {
+    width: 100%;
+    min-width: 0;
   }
 }

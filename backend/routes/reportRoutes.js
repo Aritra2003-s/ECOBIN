@@ -31,8 +31,26 @@ router.post('/',
     body('category')
       .trim()
       .notEmpty().withMessage('Category selection is required')
-      .toLowerCase() // FIXED: Normalizes mixed casing (e.g. "Recyclable" -> "recyclable") to pass backend validations
-      .isIn(['general', 'recyclable', 'hazardous', 'organic', 'electronic', 'medical', 'construction', 'other'])
+      .toLowerCase()
+      .isIn([
+        'general',
+        'recyclable',
+        'hazardous',
+        'organic',
+        'electronic',
+        'e_waste',
+        'medical',
+        'construction',
+        'illegal_dumping',
+        'overflowing_bin',
+        'hazardous_spill',
+        'missed_collection',
+        'plastic',
+        'paper',
+        'metal',
+        'glass',
+        'other',
+      ])
       .withMessage('Invalid waste category selection')
       .bail(),
 

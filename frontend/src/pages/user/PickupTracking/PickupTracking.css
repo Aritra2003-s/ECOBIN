@@ -1,173 +1,275 @@
-/* ── Main Layout ── */
-.tracking-container {
-  width: 100%;
-  font-family: 'Plus Jakarta Sans', 'Geist', 'Inter', -apple-system, sans-serif;
-}
+/* ==========================================================================
+   EcoBin • Pickup Tracking SaaS Styles
+   ========================================================================== */
 
-.tracking-grid {
-  display: grid;
-  /* Columns will fit naturally unless space is constrained */
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
-  align-items: start;
-}
-
-/* ── Pickup List Column ── */
-.pickup-list {
+.tracking-saas-page {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #0F172A;
 }
 
-.pickup-card {
-  cursor: pointer;
-  border: 1px solid #333333;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.pickup-card:hover {
-  box-shadow: 0 4px 12px rgba(255, 77, 0, 0.15);
-  border-color: rgba(255, 77, 0, 0.4);
-  background: rgba(255, 77, 0, 0.05);
-}
-
-/* Border overrides regular card border when selected */
-.pickup-card.selected {
-  border: 2px solid #FF4D00;
-}
-
-.pickup-card-title {
-  font-weight: 600;
-  text-transform: capitalize;
-  color: #FFFFFF;
-}
-
-.pickup-card-text {
-  font-size: 13px;
-  color: #808080;
+.tracking-header .page-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 2.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-heading, #0F172A);
   margin: 0;
 }
 
-.pickup-card-subtext {
-  font-size: 13px;
-  color: #B0B0B0;
-  margin: 4px 0 0 0;
+.live-gps-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  background: #E0F2FE;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0369A1;
 }
 
-/* ── Details Card Area ── */
-.details-card {
-  position: sticky;
-  top: 80px; /* Adjust this value if you have a fixed top navbar */
+.tracking-workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 28px;
+  align-items: flex-start;
 }
 
-.details-title {
-  font-weight: 600;
-  font-size: 16px;
-  margin: 0 0 20px 0;
+.list-title {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #64748B;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
 }
 
-/* ── Progress Tracker ── */
-.progress-container {
-  margin-bottom: 24px;
+.pickup-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.progress-track {
+.tracking-item-card {
+  padding: 18px;
+  background: #ffffff;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tracking-item-card:hover {
+  border-color: var(--color-primary, #10B981);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.1);
+}
+
+.tracking-item-card.active-card {
+  background: #ECFDF5;
+  border-color: var(--color-primary, #10B981);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.16);
+}
+
+.card-top-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 8px;
 }
 
-.progress-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
+.item-waste-type {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  text-transform: capitalize;
 }
 
-.progress-icon {
-  width: 28px;
-  height: 28px;
+.item-date {
+  font-size: 0.8rem;
+  color: #475569;
+  margin: 0 0 4px;
+}
+
+.item-addr {
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+/* ── Right Column: Telemetry ────────────────────────────────── */
+.tracking-main-telemetry {
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.gps-radar-banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px;
+  background: linear-gradient(135deg, #0F172A 0%, #064E3B 100%);
+  color: #ffffff;
+  border-radius: 18px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.radar-ping-ring {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
+  background: rgba(16, 185, 129, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: 600;
-  margin-bottom: 6px;
-  z-index: 1;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+  flex-shrink: 0;
 }
 
-.progress-icon.done {
-  background: #FF4D00;
-  color: #fff;
+.radar-core-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 12px #10B981;
 }
 
-.progress-icon.pending {
-  background: #333333;
-  color: #808080;
+.radar-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #34D399;
+  letter-spacing: 0.06em;
 }
 
-.progress-label {
-  font-size: 10px;
-  text-align: center;
-  text-transform: capitalize;
+.radar-info h3 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 2px 0 2px;
 }
 
-.progress-label.done {
-  color: #FF4D00;
+.radar-info p {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
 }
 
-.progress-label.pending {
-  color: #808080;
+/* Pipeline Milestones */
+.milestone-pipeline-box h4 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0 0 16px;
 }
 
-/* ── Detail Rows ── */
-.details-list {
+.pipeline-steps-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  font-size: 14px;
+  gap: 14px;
 }
 
-.detail-row {
+.pipeline-step {
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #333333;
-  padding-bottom: 8px;
-  gap: 12px;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #F8FAFC;
+  border: 1px solid #F1F5F9;
 }
 
-.detail-label {
-  color: #808080;
+.pipeline-step.step-done {
+  background: #F0FDF4;
+  border-color: rgba(16, 185, 129, 0.25);
 }
 
-.detail-value {
-  font-weight: 500;
-  text-align: right;
+.pipeline-step.step-current {
+  background: #ECFDF5;
+  border-color: var(--color-primary, #10B981);
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.12);
+}
+
+.step-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #E2E8F0;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.pipeline-step.step-done .step-circle {
+  background: #10B981;
+  color: #ffffff;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-name {
+  font-size: 0.88rem;
+  color: #0F172A;
+}
+
+.step-sub {
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+/* Details Grid */
+.tracking-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.detail-item {
+  padding: 16px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.detail-val {
+  font-size: 0.95rem;
+  color: #0F172A;
+  font-weight: 700;
   text-transform: capitalize;
-  color: #FFFFFF;
 }
 
-/* ── Responsive Adjustments ── */
-@media (max-width: 768px) {
-  .tracking-grid {
-    grid-template-columns: 1fr; /* Stack columns vertically on mobile */
-  }
-  
-  .details-card {
-    position: static; /* Removes sticky positioning so it flows naturally */
-    margin-top: 12px;
-  }
-  
-  /* Prevent progress tracker text/icons from overlapping on very small screens */
-  .progress-icon {
-    width: 24px;
-    height: 24px;
-    font-size: 10px;
-  }
-  
-  .progress-label {
-    font-size: 9px;
+@media (max-width: 900px) {
+  .tracking-workspace-grid {
+    grid-template-columns: 1fr;
   }
 }

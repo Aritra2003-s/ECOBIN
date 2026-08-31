@@ -23,11 +23,31 @@ const pickupRequestSchema = new mongoose.Schema(
     wasteType: {
       type: String,
       required: [true, 'Waste type is required'],
-      enum: ['general', 'recyclable', 'hazardous', 'organic', 'electronic', 'bulky', 'other'],
+      enum: [
+        'general',
+        'recyclable',
+        'hazardous',
+        'organic',
+        'electronic',
+        'e_waste',
+        'bulky',
+        'medical',
+        'construction',
+        'plastic',
+        'paper',
+        'metal',
+        'glass',
+        'other',
+      ],
+      default: 'general',
     },
     quantity: {
       value: { type: Number, required: true, min: 0 },
-      unit:  { type: String, enum: ['kg', 'liters', 'bags', 'items'], default: 'bags' },
+      unit: {
+        type: String,
+        enum: ['kg', 'liters', 'bags', 'items', 'lbs', 'units'],
+        default: 'bags',
+      },
     },
     description: {
       type: String,

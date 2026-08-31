@@ -33,13 +33,14 @@ export const classifyFromText = async (req, res, next) => {
 // POST /api/v1/ai/classify-image
 export const classifyFromImage = async (req, res, next) => {
   try {
-    if (!req.file) throw new ApiError(400, 'Image file is required.');
+    const file = req.file || (req.files && req.files[0]);
+    if (!file) throw new ApiError(400, 'Image file is required.');
 
-    const result = await classifyWasteFromImage(req.file.path);
+    const result = await classifyWasteFromImage(file.path);
 
     const insight = await AIInsight.create({
       type: 'waste_classification',
-      payload: { ...result, rawInput: req.file.path, summary: result.disposalMethod },
+      payload: { ...result, rawInput: file.path, summary: result.disposalMethod },
       model: result.model,
       generatedBy: req.user._id,
     });
