@@ -79,6 +79,29 @@ app.use(`${API}/routes`, routeRoutes);
 app.use(`${API}/analytics`, analyticsRoutes);
 app.use(`${API}/ai`, aiRoutes);
 
+// Welcome & System Status Root Endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    name: 'EcoBin Waste Management System API',
+    status: 'online',
+    environment: config.nodeEnv,
+    version: 'v1.0.0',
+    documentation: `${req.protocol}://${req.get('host')}/api/v1/health`,
+    endpoints: {
+      health: `${API}/health`,
+      auth: `${API}/auth`,
+      users: `${API}/users`,
+      reports: `${API}/reports`,
+      pickups: `${API}/pickups`,
+      routes: `${API}/routes`,
+      analytics: `${API}/analytics`,
+      ai: `${API}/ai`,
+    },
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // Health check endpoint
 app.get(`${API}/health`, (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
