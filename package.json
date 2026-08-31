@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "start": "node backend/server.js",
-    "build": "npm --prefix backend install",
+    "build": "npm --prefix frontend run build",
+    "backend:install": "npm --prefix backend install",
+    "frontend:install": "npm --prefix frontend install",
     "seed": "npm --prefix backend run seed",
     "backend:dev": "npm --prefix backend run dev",
     "frontend:dev": "npm --prefix frontend run dev"
