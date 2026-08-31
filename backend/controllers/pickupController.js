@@ -1,8 +1,22 @@
+import mongoose from 'mongoose';
 import PickupRequest from '../models/PickupRequest.js';
 import Staff from '../models/Staff.js';
 import Vehicle from '../models/Vehicle.js';
 import ApiError from '../utils/ApiError.js';
 import ApiResponse from '../utils/ApiResponse.js';
+
+// GET /api/v1/pickups/resources/meta (admin — get staff and vehicles for assignment dropdowns)
+export const getPickupResources = async (req, res, next) => {
+  try {
+    const [staff, vehicles] = await Promise.all([
+      Staff.find({ isActive: true }).sort({ employeeId: 1 }),
+      Vehicle.find({ isActive: true }).sort({ registrationNumber: 1 }),
+    ]);
+    res.status(200).json(new ApiResponse(200, { staff, vehicles }));
+  } catch (err) {
+    next(err);
+  }
+};
 
 // POST /api/v1/pickups
 export const createPickup = async (req, res, next) => {
@@ -39,8 +53,8 @@ export const getPickups = async (req, res, next) => {
     const [pickups, total] = await Promise.all([
       PickupRequest.find(filter)
         .populate('requestedBy', 'name email phone')
-        .populate('assignedTo.staff', 'name phone')
-        .populate('assignedTo.vehicle', 'registrationNumber type')
+        .populate('assignedTo.staff', 'name phone employeeId role')
+        .populate('assignedTo.vehicle', 'registrationNumber type model')
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(Number(limit)),
@@ -63,8 +77,8 @@ export const getPickupById = async (req, res, next) => {
   try {
     const pickup = await PickupRequest.findById(req.params.id)
       .populate('requestedBy', 'name email phone address')
-      .populate('assignedTo.staff', 'name phone employeeId')
-      .populate('assignedTo.vehicle', 'registrationNumber type capacity');
+      .populate('assignedTo.staff', 'name phone employeeId role')
+      .populate('assignedTo.vehicle', 'registrationNumber type capacity model');
 
     if (!pickup) throw new ApiError(404, 'Pickup request not found.');
 
@@ -108,15 +122,21 @@ export const updatePickupStatus = async (req, res, next) => {
     if (status === 'assigned') {
       if (!staffId || !vehicleId) throw new ApiError(400, 'Staff and vehicle are required for assignment.');
 
-      const [staff, vehicle] = await Promise.all([
-        Staff.findById(staffId),
-        Vehicle.findById(vehicleId),
-      ]);
+      // Check by _id or employeeId for staff
+      let staff = mongoose.isValidObjectId(staffId)
+        ? await Staff.findById(staffId)
+        : await Staff.findOne({ employeeId: String(staffId).toUpperCase() });
+
+      // Check by _id or registrationNumber for vehicle
+      let vehicle = mongoose.isValidObjectId(vehicleId)
+        ? await Vehicle.findById(vehicleId)
+        : await Vehicle.findOne({ registrationNumber: String(vehicleId).toUpperCase() });
+
       if (!staff)   throw new ApiError(404, 'Staff member not found.');
       if (!vehicle) throw new ApiError(404, 'Vehicle not found.');
 
-      pickup.assignedTo.staff   = staffId;
-      pickup.assignedTo.vehicle = vehicleId;
+      pickup.assignedTo.staff   = staff._id;
+      pickup.assignedTo.vehicle = vehicle._id;
 
       // Update availability
       staff.availability   = 'on_route';
@@ -125,7 +145,7 @@ export const updatePickupStatus = async (req, res, next) => {
     }
 
     // Free staff + vehicle when completed
-    if (status === 'completed' && pickup.assignedTo.staff) {
+    if (status === 'completed' && pickup.assignedTo?.staff) {
       await Promise.all([
         Staff.findByIdAndUpdate(pickup.assignedTo.staff,   { availability: 'available' }),
         Vehicle.findByIdAndUpdate(pickup.assignedTo.vehicle, { status: 'available' }),

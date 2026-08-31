@@ -31,13 +31,15 @@
 
 /* Light Aesthetic BGs */
 .insight-card__face--front {
-  background: linear-gradient(135deg, #ffffff 0%, #d3f3b9 100%);
-  color: #1e293b;
+  background: #ffffff;
+  color: var(--color-heading, #17221D);
+  border: 1px solid var(--color-border, #e0eee6);
 }
 
 .insight-card__face--back {
-  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-  color: #064e3b;
+  background: var(--color-pale-mint, #F2FAF5);
+  color: var(--color-heading, #17221D);
+  border: 1px solid rgba(101, 184, 145, 0.3);
   transform: rotateY(180deg);
 }
 

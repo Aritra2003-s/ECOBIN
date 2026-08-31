@@ -8,10 +8,18 @@ import useToast from '../../../hooks/useToast';
 import { formatDate } from '../../../utils/formatDate';
 import './RouteManagement.css'; // Import the CSS file
 
+const SEED_DRIVERS = [
+  { id: '69f841fe07129e2d0c5b6db1', name: 'Rajesh Kumar (EMP001 - Driver)' },
+  { id: '69f841fe07129e2d0c5b6db2', name: 'Mohan Singh (EMP002 - Driver)' },
+  { id: '69f841fe07129e2d0c5b6db3', name: 'Deepa Roy (EMP003 - Collector)' },
+  { id: '69f841fe07129e2d0c5b6db4', name: 'Vikram Patil (EMP004 - Supervisor)' },
+];
+
 export default function RouteManagement() {
   const toast = useToast();
   const [createOpen, setCreateOpen] = useState(false);
   const [saving, setSaving]         = useState(false);
+  const [drivers, setDrivers]       = useState(SEED_DRIVERS);
   
   // Cleaned form initialization state matching structural Mongoose schema requirements
   const [form, setForm] = useState({ 
@@ -34,13 +42,6 @@ export default function RouteManagement() {
     { value: 'active', label: 'Active' },
     { value: 'completed', label: 'Completed' },
     { value: 'cancelled', label: 'Cancelled' }
-  ];
-
-  // Drivers updated with clean, real 24-character hex MongoDB ObjectIDs to avoid CastErrors
-  const DRIVER_OPTIONS = [
-    { id: '64f1bc23e4b0123456789abc', name: 'Alex Johnson' },
-    { id: '64f1bc23e4b0123456789def', name: 'Marcus Vance' },
-    { id: '64f1bc23e4b0123456789ghi', name: 'Sarah Jenkins' }
   ];
 
   const set = (field) => (e) => setForm((p) => ({ ...p, [field]: e.target.value }));
@@ -207,7 +208,7 @@ export default function RouteManagement() {
               <div className="select-wrapper">
                 <select className="form-input" value={form.assignedDriver} onChange={set('assignedDriver')}>
                   <option value="">Unassigned</option>
-                  {DRIVER_OPTIONS.map((drv) => (
+                  {drivers.map((drv) => (
                     <option key={drv.id} value={drv.id}>{drv.name}</option>
                   ))}
                 </select>

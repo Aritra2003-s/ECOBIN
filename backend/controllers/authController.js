@@ -10,12 +10,14 @@ const signToken = (id) =>
 // POST /api/v1/auth/register
 export const register = async (req, res, next) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, role } = req.body;
 
     const existing = await User.findOne({ email });
     if (existing) throw new ApiError(409, 'An account with this email already exists.');
 
-    const user = await User.create({ name, email, password, phone });
+    const userRole = role && ['user', 'admin'].includes(role.toLowerCase()) ? role.toLowerCase() : 'user';
+
+    const user = await User.create({ name, email, password, phone, role: userRole });
     const token = signToken(user._id);
 
     res.status(201).json(

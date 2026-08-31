@@ -1,28 +1,34 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
+import Loader from '../../common/Loader/Loader';
 
 export default function RoleRoute({ allowedRole }) {
-  const { user, loading } = useAuth(); // Assuming your context provides a loading state
+  const { user, loading } = useAuth();
+  const location = useLocation();
 
   // 1. Wait for auth check to complete
   if (loading) {
-    return <div className="loading-spinner">Loading...</div>; 
+    return <Loader fullscreen message="Verifying security credentials..." />;
   }
 
-  // 2. If not logged in at all, go to login
+  // 2. If not logged in, redirect to login with return path
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={`/login?redirect=${encodeURIComponent(location.pathname)}`} replace />;
   }
 
-  // 3. If logged in but the role is wrong
-  if (user.role !== allowedRole) {
-    console.warn(`Access denied: Required ${allowedRole}, but user is ${user.role}`);
+  // 3. Normalize user role
+  const userRole = (user.role || 'user').toLowerCase();
+  const requiredRole = (allowedRole || 'user').toLowerCase();
+
+  // 4. If logged in but role mismatch
+  if (userRole !== requiredRole) {
+    console.warn(`Access denied to ${location.pathname}: Required ${requiredRole}, but user role is ${userRole}`);
     
-    // Redirect to their own valid dashboard instead of just blocking them
-    const redirectPath = user.role === 'admin' ? '/admin' : '/dashboard';
+    // Redirect to their respective authorized root
+    const redirectPath = userRole === 'admin' ? '/admin' : '/dashboard';
     return <Navigate to={redirectPath} replace />;
   }
 
-  // 4. Authorized! Render the layout/page
+  // 5. Authorized! Render protected layout/page
   return <Outlet />;
 }

@@ -3,6 +3,7 @@ import { body } from 'express-validator';
 import {
   createPickup, getPickups, getPickupById,
   updatePickupStatus, cancelPickup, submitFeedback,
+  getPickupResources,
 } from '../controllers/pickupController.js';
 import protect from '../middleware/authMiddleware.js';
 import authorize from '../middleware/roleMiddleware.js';
@@ -23,6 +24,7 @@ router.post('/',
 );
 
 router.get('/', getPickups);
+router.get('/resources/meta', authorize('admin'), getPickupResources);
 router.get('/:id', getPickupById);
 router.patch('/:id/status', authorize('admin'), updatePickupStatus);
 router.patch('/:id/cancel', cancelPickup);

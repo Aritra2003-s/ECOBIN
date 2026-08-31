@@ -119,25 +119,40 @@ export default function UserDashboard() {
         </div>
       </section>
 
-      {/* Summary Grid */}
+      {/* Summary Grid - Clean SaaS Metric Cards */}
       <div className="dashboard-summary-grid">
-        <div className="dashboard-summary-card">
-          <span className="card-dot" style={{background: '#e9c483'}}></span>
+        <div className="dashboard-summary-card glass-card">
+          <div className="summary-card-top">
+            <span className="summary-card-icon" style={{ background: '#ECFDF5', color: '#059669' }}>📦</span>
+            <span className="card-dot" style={{ background: '#10B981' }}></span>
+          </div>
           <span className="dashboard-summary-card__label">Total Pickups</span>
           <strong className="dashboard-summary-card__value">{totalPickups}</strong>
+          <span className="summary-card-meta">All-time booked requests</span>
         </div>
-        <div className="dashboard-summary-card dashboard-summary-card--accent">
-          <span className="card-dot" style={{background: '#fff'}}></span>
-          <span className="dashboard-summary-card__label">Next Pickup</span>
+
+        <div className="dashboard-summary-card dashboard-summary-card--featured glass-card">
+          <div className="summary-card-top">
+            <span className="summary-card-icon" style={{ background: '#FEF3C7', color: '#D97706' }}>🚛</span>
+            <span className="card-dot" style={{ background: '#F59E0B' }}></span>
+          </div>
+          <span className="dashboard-summary-card__label">Next Scheduled Pickup</span>
           <strong className="dashboard-summary-card__value">
             {nextPickup ? nextPickup.wasteType.replace('_', ' ') : 'None'}
           </strong>
-          <small>{nextPickup ? formatDate(nextPickup.preferredDate) : 'No upcoming slots'}</small>
+          <div className="summary-card-badge">
+            <span>📅 {nextPickup ? formatDate(nextPickup.preferredDate) : 'No upcoming slots'}</span>
+          </div>
         </div>
-        <div className="dashboard-summary-card">
-          <span className="card-dot" style={{background: '#f43f5e'}}></span>
+
+        <div className="dashboard-summary-card glass-card">
+          <div className="summary-card-top">
+            <span className="summary-card-icon" style={{ background: '#FEE2E2', color: '#DC2626' }}>⏳</span>
+            <span className="card-dot" style={{ background: '#EF4444' }}></span>
+          </div>
           <span className="dashboard-summary-card__label">Pending Items</span>
           <strong className="dashboard-summary-card__value">{pendingItems}</strong>
+          <span className="summary-card-meta">Active requests & reports</span>
         </div>
       </div>
 

@@ -4,12 +4,12 @@
   bottom: 0;
   left: 0;
   width: var(--sidebar-width);
-  background: linear-gradient(180deg, #f0fdf4 0%, #ace99d 100%);
-  border-right: 1px solid rgba(16, 185, 129, 0.1);
+  background: var(--color-pale-mint, #F2FAF5);
+  border-right: 1px solid var(--color-border, #e0eee6);
   display: flex;
   flex-direction: column;
   z-index: 50;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (max-width: 1023px) {
@@ -22,7 +22,7 @@
 }
 
 .app-sidebar__header {
-  padding: 1rem 1.25rem; /* Reduced from 1.5rem */
+  padding: 1.25rem 1.25rem 1rem;
 }
 
 .app-sidebar__brand-row {
@@ -38,82 +38,57 @@
 }
 
 .app-sidebar__brand-mark {
-  width: 30px;
-  height: 30px;
-  background: linear-gradient(white);
-  color: white;
-  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  background: #ffffff;
+  border: 1px solid var(--color-border, #e0eee6);
+  border-radius: var(--border-radius-sm, 8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 1rem;
+  box-shadow: var(--shadow-xs);
 }
 
 .app-sidebar__brand-mark img {
-  width: 80%; /* Padding around the logo within the box */
-  height: 80%;
+  width: 78%;
+  height: 78%;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.15));
 }
 
 .app-sidebar__brand-copy strong {
   display: block;
-  font-size: 1.2rem;
-  color: #0f1013;
-  line-height: 1.2;
+  font-size: 1.05rem;
+  color: var(--color-heading, #17221D);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .app-sidebar__brand-copy span {
-  font-size: 0.8rem;
-  color: #2a2e33;
+  font-size: 0.75rem;
+  color: var(--color-slate, #66736C);
+  font-weight: 500;
 }
 
 .app-sidebar__close {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 10px; /* Slightly squarer for better 3D effect */
-  color: #0c6aee;
-  font-size: 14px;
+  border: 1px solid var(--color-border, #e0eee6);
+  border-radius: 8px;
+  color: var(--color-slate, #66736C);
+  font-size: 13px;
   cursor: pointer;
   outline: none;
-  position: relative;
-  
-  /* The 3D Shadow - creating the "thickness" */
-  box-shadow: 0 4px 0px 0px rgba(0, 0, 0, 0.1), 
-              0 8px 15px rgba(0, 0, 0, 0.05);
-  
-  /* Smooth transition for the "pressing" animation */
-  transition: all 0.1s ease;
-  transform: translateY(0);
+  transition: all 0.2s ease;
 }
 
 .app-sidebar__close:hover {
-  background: #f8fafc;
-  color: #b94141;
-  /* Lift slightly on hover */
-  transform: translateY(-2px);
-  box-shadow: 0 6px 0px 0px rgba(0, 0, 0, 0.1), 
-              0 12px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* The 3D Pressing Animation */
-.app-sidebar__close:active {
-  /* Push down - should match the height of the bottom shadow */
-  transform: translateY(4px);
-  /* Collapse the 3D shadow to make it look pressed flat */
-  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.1), 
-              0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-/* Optional: Adding a slight rotation on hover for extra flair */
-.app-sidebar__close:hover {
-  transform: translateY(-2px) rotate(5deg);
+  background: var(--color-mint, #DFF3E8);
+  color: var(--color-heading, #17221D);
 }
 
 @media (min-width: 1024px) {
@@ -124,137 +99,175 @@
 
 .app-sidebar__profile {
   padding: 0.75rem 1rem;
-  margin-top: auto; /* Pushes the profile to the bottom if the nav is short */
+  margin-top: auto;
 }
 
 .app-sidebar__profile-card {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 12px;
-  transition: all 0.2s ease;
+  gap: 0.65rem;
+  padding: 0.65rem 0.85rem;
+  background: #ffffff;
+  border: 1px solid var(--color-border, #e0eee6);
+  border-radius: var(--border-radius-md, 14px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  box-shadow: var(--shadow-xs);
 }
 
-/* Hover effect for a "premium" feel */
 .app-sidebar__profile-card:hover {
   background: #ffffff;
-  border-color: var(--primary-color);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
+  border-color: var(--color-primary, #65B891);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1.5px);
 }
 
 .app-sidebar__avatar {
-  flex-shrink: 0; /* Prevents avatar from squishing */
+  flex-shrink: 0;
   width: 34px;
   height: 34px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, #65B891 0%, #63B7A4 100%);
   color: white;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1rem;
-  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2);
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(101, 184, 145, 0.3);
 }
 
 .app-sidebar__profile-copy {
   display: flex;
   flex-direction: column;
-  min-width: 0; /* Critical for text-overflow to work */
+  min-width: 0;
+}
+
+.app-sidebar__name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.role-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.role-tag--user {
+  background: #D1FAE5;
+  color: #065F46;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.role-tag--admin {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.app-sidebar__portal-switch {
+  padding: 0 1rem 0.5rem;
+}
+
+.btn-portal-switch {
+  width: 100%;
+  padding: 7px 10px;
+  background: #ffffff;
+  border: 1.5px dashed rgba(16, 185, 129, 0.4);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #059669;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-portal-switch:hover {
+  background: #10B981;
+  color: #ffffff;
+  border-style: solid;
 }
 
 .app-sidebar__profile-copy strong {
-  font-size: 0.9rem;
-  color: #1e293b;
+  font-size: 0.88rem;
+  color: var(--color-heading, #17221D);
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Keeps names on one line */
+  text-overflow: ellipsis;
 }
 
 .app-sidebar__profile-copy span {
-  font-size: 0.75rem;
-  color: #64748b;
+  font-size: 0.72rem;
+  color: var(--color-slate, #66736C);
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* Keeps emails from breaking the box */
-}
-
-/* Responsive adjustment for very narrow sidebars */
-@media (max-width: 300px) {
-  .app-sidebar__profile-copy {
-    display: none; /* Only show avatar if sidebar is collapsed/thin */
-  }
-  
-  .app-sidebar__profile-card {
-    justify-content: center;
-    padding: 0.5rem;
-  }
+  text-overflow: ellipsis;
 }
 
 .app-sidebar__nav {
   flex: 1;
-  padding: 1rem;
+  padding: 0.75rem 0.85rem;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
-/* 1. Add perspective to the link to allow 3D depth */
 .app-sidebar__link {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  color: #64748b;
+  padding: 0.7rem 0.9rem;
+  color: var(--color-slate, #66736C);
   text-decoration: none;
-  border-radius: 10px;
-  margin-bottom: 0.25rem;
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); /* Bouncy transition */
+  border-radius: var(--border-radius-sm, 8px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   font-weight: 500;
-  perspective: 1000px; /* Essential for 3D space */
+  font-size: 0.9rem;
 }
 
-/* 2. Style the icon with a base 3D state */
 .app-sidebar__link-icon {
-  font-size: 1.2rem;
-  display: inline-block; /* Required for transforms to work */
-  transition: transform 0.4s ease, filter 0.3s ease;
-  transform-style: preserve-3d;
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
-/* 3. Hover Effects */
 .app-sidebar__link:hover {
-  background: #f8fafc;
-  color: var(--primary-color);
-  transform: translateX(5px); /* Subtle shift for the whole link */
+  background: var(--color-mint, #DFF3E8);
+  color: var(--color-heading, #17221D);
+  transform: translateX(3px);
 }
 
-/* The 3D Animation: Rotate and Lift */
 .app-sidebar__link:hover .app-sidebar__link-icon {
-  transform: translateZ(20px) rotateY(15deg); 
-  filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.15));
-  color: var(--primary-color);
+  color: var(--color-primary, #65B891);
+  transform: scale(1.1);
 }
 
-/* 4. Active State (Selected) */
 .app-sidebar__link--active {
-  background: #ecfdf5;
-  color: var(--primary-color);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  background: var(--color-mint, #DFF3E8);
+  color: var(--color-heading, #17221D);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(101, 184, 145, 0.15);
+  border-left: 3.5px solid var(--color-primary, #65B891);
 }
 
 .app-sidebar__link--active .app-sidebar__link-icon {
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.4)); /* Glow effect */
+  color: var(--color-primary, #65B891);
+  transform: scale(1.15);
 }
 
 .app-sidebar__footer {
-  padding: 1.5rem;
-  border-top: 1px solid #f1f5f9;
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--color-border, #e0eee6);
 }
 
 .app-sidebar__logout {
@@ -263,16 +276,19 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem;
-  background: #fff1f2;
-  color: #e11d48;
-  border: none;
-  border-radius: 10px;
+  padding: 0.65rem;
+  background: #ffffff;
+  color: var(--color-slate, #66736C);
+  border: 1px solid var(--color-border, #e0eee6);
+  border-radius: var(--border-radius-sm, 8px);
   font-weight: 600;
+  font-size: 0.85rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 }
 
 .app-sidebar__logout:hover {
-  background: #ffe4e6;
+  background: #fee2e2;
+  color: #991b1b;
+  border-color: #fca5a5;
 }

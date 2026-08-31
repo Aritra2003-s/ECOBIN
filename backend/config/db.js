@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
-import { config } from './env.js'; // Ensure this path is correct
+import dns from 'node:dns';
+import { config } from './env.js';
+
+// Configure DNS resolution to prevent ENOTFOUND on mongodb+srv SRV lookup
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+} catch (e) {
+  console.warn('Could not set custom DNS servers:', e.message);
+}
 
 const connectDB = async () => {
   try {

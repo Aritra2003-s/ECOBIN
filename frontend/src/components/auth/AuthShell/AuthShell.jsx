@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import ecobinLogo from '../../../assets/logo.png';
 import './AuthShell.css';
 
 export default function AuthShell({
@@ -18,11 +20,16 @@ export default function AuthShell({
     <div className="auth-shell">
       <div className="auth-shell__backdrop" />
 
-      <div className="auth-shell__content">
+      <motion.div 
+        className="auth-shell__content"
+        initial={{ opacity: 0, scale: 0.96, y: 15 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      >
         <section className="auth-shell__panel auth-shell__panel--brand">
           <Link to="/" className="auth-shell__brand">
             <span className="auth-shell__brand-mark">
-              <img src="assets/logo.png" alt="Ecobin Logo" />
+              <img src={ecobinLogo} alt="Ecobin Logo" />
             </span>
             <span className="auth-shell__brand-copy">
               <strong>Ecobin</strong>
@@ -37,13 +44,18 @@ export default function AuthShell({
           {highlights.length > 0 && (
             <div className="auth-shell__highlights">
               {highlights.map((item) => (
-                <div key={item.title} className="auth-shell__highlight">
+                <motion.div 
+                  key={item.title} 
+                  className="auth-shell__highlight"
+                  whileHover={{ x: 6 }}
+                  transition={{ duration: 0.2 }}
+                >
                   <span className="auth-shell__highlight-icon">{item.icon}</span>
                   <div>
                     <strong>{item.title}</strong>
                     <p>{item.description}</p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           )}
@@ -63,10 +75,8 @@ export default function AuthShell({
         <section className="auth-shell__panel auth-shell__panel--form">
           {topbarSlot && <div className="auth-shell__topbar">{topbarSlot}</div>}
           <div className="auth-shell__form-card">{children}</div>
-
-          
         </section>
-      </div>
+      </motion.div>
     </div>
   );
 }

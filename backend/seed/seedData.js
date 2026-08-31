@@ -1,7 +1,14 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import dns from 'node:dns';
 import dotenv from 'dotenv';
 dotenv.config();
+
+try {
+  dns.setServers(['8.8.8.8', '8.8.4.4', '1.1.1.1']);
+} catch (e) {
+  console.warn('Could not set custom DNS servers:', e.message);
+}
 
 // ── Import all models ─────────────────────────────────────────────────────────
 import User          from '../models/User.js';

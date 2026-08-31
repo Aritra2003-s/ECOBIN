@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
+import ecobinLogo from '../../../assets/logo.png';
 import './Sidebar.css';
 
 export default function Sidebar({ navItems, isAdmin = false, isOpen = false, onClose, onNavigate: onNavigateProp }) {
@@ -28,7 +29,7 @@ export default function Sidebar({ navItems, isAdmin = false, isOpen = false, onC
         <div className="app-sidebar__brand-row">
           <div className="app-sidebar__brand">
             <div className="app-sidebar__brand-mark">
-               <img src="assets/logo.png" alt="Ecobin Logo" />
+               <img src={ecobinLogo} alt="Ecobin Logo" />
             </div>
             <div className="app-sidebar__brand-copy">
               <strong>Ecobin</strong>
@@ -46,11 +47,31 @@ export default function Sidebar({ navItems, isAdmin = false, isOpen = false, onC
         <div className="app-sidebar__profile-card" onClick={handleProfileClick}>
           <div className="app-sidebar__avatar">{initial}</div>
           <div className="app-sidebar__profile-copy">
-            <strong>{user?.name || 'User'}</strong>
-            <span>{user?.email || 'No email available'}</span>
+            <div className="app-sidebar__name-row">
+              <strong>{user?.name || 'User'}</strong>
+              <span className={`role-tag ${isAdmin ? 'role-tag--admin' : 'role-tag--user'}`}>
+                {isAdmin ? 'Admin' : 'Citizen'}
+              </span>
+            </div>
+            <span className="app-sidebar__email">{user?.email || 'No email available'}</span>
           </div>
         </div>
       </div>
+
+      {user?.role === 'admin' && (
+        <div className="app-sidebar__portal-switch">
+          <button
+            type="button"
+            className="btn-portal-switch"
+            onClick={() => {
+              onNavigateProp?.();
+              navigate(isAdmin ? '/dashboard' : '/admin');
+            }}
+          >
+            <span>{isAdmin ? '🌿 Switch to Citizen View' : '⚡ Switch to Admin Console'}</span>
+          </button>
+        </div>
+      )}
 
       <nav className="app-sidebar__nav">
         {navItems.map((item) => (
