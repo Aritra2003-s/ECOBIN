@@ -1,0 +1,16 @@
+{
+  "name": "ecobin-monorepo",
+  "version": "1.0.0",
+  "description": "ECOBIN Waste Management System — Monorepo Root",
+  "private": true,
+  "scripts": {
+    "start": "node backend/server.js",
+    "build": "npm --prefix backend install",
+    "seed": "npm --prefix backend run seed",
+    "backend:dev": "npm --prefix backend run dev",
+    "frontend:dev": "npm --prefix frontend run dev"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
