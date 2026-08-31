@@ -29,32 +29,34 @@ const allowedOrigins = config.clientUrl
   ? config.clientUrl.split(',').map((url) => url.trim().replace(/\/$/, ''))
   : ['http://localhost:5173', 'http://localhost:3000'];
 
-app.use(cors({
+const corsOptions = {
   origin: (origin, callback) => {
-    // Allow non-browser requests (e.g. server-to-server, health probes, Postman)
+    // Allow server-to-server, health checks, curl, or mobile app requests
     if (!origin) return callback(null, true);
 
-    const cleanOrigin = origin.replace(/\/$/, '');
+    const cleanOrigin = origin.trim().replace(/\/$/, '');
 
-    // Allow configured origins, localhost, or any *.vercel.app deployment
-    const isAllowed =
-      allowedOrigins.includes(cleanOrigin) ||
-      allowedOrigins.includes('*') ||
-      /^https:\/\/.*\.vercel\.app$/.test(cleanOrigin) ||
-      /^http:\/\/localhost:\d+$/.test(cleanOrigin) ||
-      /^http:\/\/127\.0\.0\.1:\d+$/.test(cleanOrigin);
+    // Allow all vercel.app domains, localhost ports, and configured URLs
+    const isVercel = cleanOrigin.endsWith('.vercel.app') || cleanOrigin.includes('vercel.app');
+    const isLocal = cleanOrigin.startsWith('http://localhost') || cleanOrigin.startsWith('http://127.0.0.1');
+    const isExplicit = allowedOrigins.includes(cleanOrigin) || allowedOrigins.includes('*');
 
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      console.warn(`[CORS] Request blocked from unauthorized origin: ${origin}`);
-      callback(new Error(`CORS policy does not allow access from origin ${origin}`), false);
+    if (isVercel || isLocal || isExplicit) {
+      return callback(null, true);
     }
+
+    console.warn(`[CORS] Blocked request from unauthorized origin: ${origin}`);
+    return callback(null, false);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-}));
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
