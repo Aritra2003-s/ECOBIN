@@ -24,9 +24,36 @@ const app = express();
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 
+// Flexible CORS for Vercel production, preview branches, and local dev
+const allowedOrigins = config.clientUrl
+  ? config.clientUrl.split(',').map((url) => url.trim().replace(/\/$/, ''))
+  : ['http://localhost:5173', 'http://localhost:3000'];
+
 app.use(cors({
-  origin: config.clientUrl,
+  origin: (origin, callback) => {
+    // Allow non-browser requests (e.g. server-to-server, health probes, Postman)
+    if (!origin) return callback(null, true);
+
+    const cleanOrigin = origin.replace(/\/$/, '');
+
+    // Allow configured origins, localhost, or any *.vercel.app deployment
+    const isAllowed =
+      allowedOrigins.includes(cleanOrigin) ||
+      allowedOrigins.includes('*') ||
+      /^https:\/\/.*\.vercel\.app$/.test(cleanOrigin) ||
+      /^http:\/\/localhost:\d+$/.test(cleanOrigin) ||
+      /^http:\/\/127\.0\.0\.1:\d+$/.test(cleanOrigin);
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      console.warn(`[CORS] Request blocked from unauthorized origin: ${origin}`);
+      callback(new Error(`CORS policy does not allow access from origin ${origin}`), false);
+    }
+  },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 
 app.use(express.json({ limit: '10mb' }));
